@@ -1,6 +1,6 @@
 <template>
   <header
-    class="h-16 flex items-center transition-colors duration-200 dark:bg-surface-bg-dark bg-surface-bg-light border-b dark:border-border-dark border-border-light shadow-sm"
+    class="h-16 flex items-center transition-colors duration-200 border-b shadow-sm"
   >
     <!-- Sidebar toggle button for mobile -->
     <Button
@@ -15,15 +15,11 @@
 
     <!-- App logo/title -->
     <div class="flex items-center px-4">
-      <span
-        class="text-xl font-semibold dark:text-text-primary-dark text-text-primary-light ml-2"
-      >
-        SaaS App
-      </span>
+      <span class="text-xl font-semibold text-primary ml-2"> SaaS App </span>
     </div>
 
     <!-- Search box -->
-    <div class="flex-grow mx-4 hidden md:flex justify-center">
+    <div class="flex-grow mx-4 hidden md:block">
       <span class="p-input-icon-left w-full max-w-md">
         <i class="pi pi-search" />
         <InputText
@@ -64,10 +60,7 @@
         text
       >
         <Avatar icon="pi pi-user" class="mr-2" size="normal" />
-        <span
-          class="font-medium dark:text-text-primary-dark text-text-primary-light hidden sm:inline"
-          >User Name</span
-        >
+        <span class="font-medium text-primary hidden sm:inline">User Name</span>
         <i class="pi pi-angle-down ml-2"></i>
       </Button>
     </div>

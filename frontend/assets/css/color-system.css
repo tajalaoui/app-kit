@@ -36,6 +36,13 @@
   --error: #f44336;
 }
 
+/* Apply text colors globally */
+body {
+  color: var(--text-primary);
+  background-color: var(--base-bg);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
 /* PrimeVue theme overrides */
 .p-component {
   font-family: inherit;
@@ -71,8 +78,55 @@ a {
   background-color: var(--action);
 }
 
+/* Text color classes that respond to theme */
+.text-primary {
+  color: var(--text-primary) !important;
+}
+
+.text-secondary {
+  color: var(--text-secondary) !important;
+}
+
 /* Transition classes for theme switching */
 .theme-transition {
   transition: background-color 0.3s ease, color 0.3s ease,
     border-color 0.3s ease;
+}
+
+/* Fix PrimeVue component text colors in dark mode */
+.dark .p-component {
+  color: var(--text-primary);
+}
+
+.dark .p-datatable .p-datatable-thead > tr > th {
+  background: var(--surface-bg);
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.dark .p-datatable .p-datatable-tbody > tr > td {
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+.dark .p-card .p-card-title,
+.dark .p-card .p-card-subtitle {
+  color: var(--text-primary);
+}
+
+.dark .p-card .p-card-content {
+  color: var(--text-primary);
+}
+
+.dark .p-menu .p-menuitem-link .p-menuitem-text,
+.dark .p-menu .p-menuitem-link .p-menuitem-icon {
+  color: var(--text-primary);
+}
+
+.dark .p-panelmenu .p-panelmenu-header > a {
+  color: var(--text-primary);
+}
+
+.dark .p-inputtext {
+  color: var(--text-primary);
 }

@@ -1,10 +1,6 @@
 <template>
-  <footer
-    class="py-3 px-4 text-center transition-colors duration-200 dark:bg-surface-bg-dark bg-surface-bg-light border-t dark:border-border-dark border-border-light"
-  >
-    <div
-      class="text-sm dark:text-text-secondary-dark text-text-secondary-light"
-    >
+  <footer class="py-3 px-4 text-center transition-colors duration-200 border-t">
+    <div class="text-sm text-secondary">
       &copy; {{ new Date().getFullYear() }} SaaS App. All rights reserved.
     </div>
   </footer>

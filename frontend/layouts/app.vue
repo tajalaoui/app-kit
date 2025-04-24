@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col min-h-screen"
+    class="flex flex-col min-h-screen theme-transition"
     :class="[colorMode === 'dark' ? 'dark' : '']"
   >
     <div class="flex flex-grow">
@@ -22,9 +22,7 @@
         />
 
         <!-- Main content -->
-        <main
-          class="flex-grow p-4 dark:bg-base-bg-dark bg-base-bg-light transition-colors duration-200"
-        >
+        <main class="flex-grow p-4 transition-colors duration-200">
           <slot />
         </main>
 

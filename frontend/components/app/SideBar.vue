@@ -1,18 +1,15 @@
 <template>
   <aside
-    class="fixed h-screen transition-all duration-200 dark:bg-surface-bg-dark bg-surface-bg-light border-r dark:border-border-dark border-border-light shadow-sm z-20"
+    class="fixed h-screen transition-all duration-200 bg-surface border-r border-default shadow-sm z-20 theme-transition"
     :class="[collapsed ? 'w-16' : 'w-64']"
   >
     <!-- Logo section -->
     <div
-      class="h-16 flex items-center justify-between border-b dark:border-border-dark border-border-light"
+      class="h-16 flex items-center justify-between border-b border-default theme-transition"
     >
       <div class="flex items-center px-4">
         <i class="pi pi-prime text-action text-xl"></i>
-        <span
-          v-if="!collapsed"
-          class="text-xl font-semibold ml-2 dark:text-text-primary-dark text-text-primary-light"
-        >
+        <span v-if="!collapsed" class="text-xl font-semibold ml-2 text-primary">
           SaaS App
         </span>
       </div>
