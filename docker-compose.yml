@@ -31,7 +31,7 @@ services:
 
   mongo:
     image: mongo:6
-    container_name: mongodb
+    container_name: app-kit-mongodb
     ports:
       - "27018:27017"  # Maps Mongo's port 27017 to host port 27018
     volumes:
