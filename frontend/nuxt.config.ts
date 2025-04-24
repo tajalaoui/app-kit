@@ -32,6 +32,7 @@ export default defineNuxtConfig({
   },
   css: [
     "./assets/css/base.scss",
+    "./assets/css/color-system.css",
     "primeicons/primeicons.css",
     "./assets/css/tailwind.css",
   ],

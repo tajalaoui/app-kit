@@ -5,8 +5,10 @@
 </template>
 
 <style>
-/* body {
-  font-family: "Inter", sans-serif !important;
+@import "./assets/css/color-system.css";
+
+body {
+  font-family: "Inter", sans-serif;
 }
 
 h1,
@@ -23,5 +25,5 @@ li,
 figcaption {
   text-wrap: pretty;
   max-width: 65ch;
-} */
+}
 </style>
