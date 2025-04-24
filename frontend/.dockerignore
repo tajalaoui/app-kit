@@ -1,0 +1,25 @@
+# Node modules
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Logs
+*.log
+
+# OS & editor files
+.DS_Store
+.env
+.env.*
+.idea
+.vscode
+
+# Build output
+.nuxt
+.output
+dist
+coverage
+
+# Docker related
+Dockerfile
+docker-compose.yml
+.dockerignore
