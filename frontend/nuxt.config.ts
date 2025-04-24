@@ -30,7 +30,11 @@ export default defineNuxtConfig({
     // importPT: { from: path.resolve(__dirname, "./presets/aura/") },
     importPT: { as: "Aura", from: "~/presets/aura" }, // for windows
   },
-  css: ["./assets/css/base.scss", "primeicons/primeicons.css", "./assets/css/tailwind.css"],
+  css: [
+    "./assets/css/base.scss",
+    "primeicons/primeicons.css",
+    "./assets/css/tailwind.css",
+  ],
   image: {
     defaults: {
       loading: "lazy",

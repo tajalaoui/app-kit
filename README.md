@@ -98,20 +98,30 @@ Create `.env` files in both frontend and backend directories:
 
 **frontend/.env**
 ```
-NUXT_PUBLIC_API_BASE=http://localhost:4000
+# Public API configuration
+NUXT_PUBLIC_API_URL=http://localhost:3000
+
+# Environment
+NUXT_ENV_MODE=development
 ```
 
 **backend/.env**
 ```
-PORT=4000
-MONGO_URI=mongodb://mongo:27017/appkit
+# Database Configuration
+MONGO_URI=mongodb://mongodb:27017/app-kit
+
+# Authentication
+JWT_SECRET=your_secret_key
+
+# Environment
+NODE_ENV=development
 ```
 
 ### Database
 
 The MongoDB instance is accessible:
-- From containers: `mongodb://mongo:27017/appkit`
-- From host: `mongodb://localhost:27018/appkit`
+- From containers: `mongodb://mongodb:27017/autera`
+- From host: `mongodb://localhost:27018/autera`
 
 ## 🛠️ Development Commands
 
