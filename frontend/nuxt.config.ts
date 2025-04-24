@@ -26,9 +26,18 @@ export default defineNuxtConfig({
       theme: {
         preset: Aura,
       },
+      // Use a global passthrough function that adds theme-transition to ALL components
+      pt: {
+        // This is the global passthrough that affects all components
+        global: {
+          // This adds theme-transition to the root of every component
+          root: ({ props, parent }) => ({
+            class: "theme-transition",
+          }),
+        },
+      },
     },
-    // importPT: { from: path.resolve(__dirname, "./presets/aura/") },
-    importPT: { as: "Aura", from: "~/presets/aura" }, // for windows
+    importPT: { as: "Aura", from: "~/presets/aura" },
   },
   css: [
     "./assets/css/base.scss",

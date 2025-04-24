@@ -130,3 +130,19 @@ a {
 .dark .p-inputtext {
   color: var(--text-primary);
 }
+
+.p-component,
+.p-component *,
+.p-card,
+.p-card-title,
+.p-card-body,
+.p-card-content,
+.p-datatable,
+.p-datatable-header,
+.p-datatable-thead,
+.p-datatable-tbody,
+.p-inputtext,
+.p-button {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
