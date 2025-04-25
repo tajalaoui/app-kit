@@ -5,24 +5,14 @@
   >
     <!-- Logo section -->
     <div
-      class="h-16 flex items-center justify-between border-b border-default theme-transition"
+      class="h-16 flex items-center justify-between border-default theme-transition"
     >
       <div class="flex items-center px-4">
         <i class="pi pi-prime text-action text-xl"></i>
         <span v-if="!collapsed" class="text-xl font-semibold ml-2 text-primary">
-          SaaS App
+          App Kit
         </span>
       </div>
-
-      <!-- Collapse button -->
-      <Button
-        @click="$emit('toggle-sidebar')"
-        :icon="collapsed ? 'pi pi-angle-right' : 'pi pi-angle-left'"
-        text
-        rounded
-        class="mr-2"
-        aria-label="Toggle sidebar"
-      />
     </div>
 
     <!-- Navigation menu -->
@@ -63,11 +53,6 @@ const menuItems = [
     label: "Customers",
     icon: "pi pi-users",
     to: "/customers",
-  },
-  {
-    label: "Products",
-    icon: "pi pi-shopping-cart",
-    to: "/products",
   },
   {
     label: "Settings",

@@ -1,0 +1,70 @@
+/* assets/css/theme.css */
+:root {
+  /* Light Theme (Default) */
+  --base-bg: #F5F5F5;
+  --surface-bg: #EEEEEE;
+  --primary-text: #1C1C1C;
+  --secondary-text: #757575;
+  --action: #29F709;
+  --action-hover: #24CC00;
+  --disabled: #B3B3B3;
+  --info: #CDDC39;
+  --link: #38B000;
+  --border: #DDDDDD;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --success: #4CAF50;
+  --warning: #FF9800;
+  --error: #F44336;
+}
+
+.dark-theme {
+  /* Dark Theme */
+  --base-bg: #121212;
+  --surface-bg: #1C1C1C;
+  --primary-text: #F5F5F5;
+  --secondary-text: #CCCCCC;
+  --action: #29F709;
+  --action-hover: #24CC00;
+  --disabled: #5A5A5A;
+  --info: #CDDC39;
+  --link: #7AEB42;
+  --border: #2E2E2E;
+  --shadow: rgba(255, 255, 255, 0.1);
+  --success: #4CAF50;
+  --warning: #FF9800;
+  --error: #F44336;
+}
+
+/* Apply styles to body */
+body {
+  background-color: var(--base-bg);
+  color: var(--primary-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Apply themed styles to common elements */
+.card, .panel, .modal {
+  background-color: var(--surface-bg);
+  border-color: var(--border);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+a {
+  color: var(--link);
+}
+
+.text-secondary {
+  color: var(--secondary-text);
+}
+
+.btn-primary {
+  background-color: var(--action);
+}
+
+.btn-primary:hover {
+  background-color: var(--action-hover);
+}
+
+.btn-disabled {
+  background-color: var(--disabled);
+}

@@ -41,7 +41,7 @@ export default defineNuxtConfig({
   },
   css: [
     "./assets/css/base.scss",
-    "./assets/css/color-system.css",
+    "./assets/css/theme.css",
     "primeicons/primeicons.css",
     "./assets/css/tailwind.css",
   ],
@@ -78,6 +78,30 @@ export default defineNuxtConfig({
       crossOriginEmbedderPolicy:
         // TODO Add .env var
         process.env.NODE_ENV === "development" ? "unsafe-none" : "require-corp",
+    },
+  },
+
+  // Build configuration
+  build: {
+    transpile: ["primevue"],
+  },
+
+  // App-level configuration
+  app: {
+    head: {
+      htmlAttrs: {
+        // We'll update this dynamically with JavaScript
+        class: "",
+      },
+    },
+  },
+
+  // Runtime config
+  runtimeConfig: {
+    public: {
+      theme: {
+        default: "light", // Default theme
+      },
     },
   },
 });

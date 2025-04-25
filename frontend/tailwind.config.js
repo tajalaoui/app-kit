@@ -1,47 +1,45 @@
-// tailwind.config.js
-
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./components/**/*.{vue,js}",
-    "./layouts/**/*.vue",
-    "./pages/**/*.vue",
-    "./plugins/**/*.{js,ts}",
-    "./nuxt.config.{js,ts}",
-    "./app.vue",
-    "./node_modules/primevue/**/*.{vue,js,ts}",
-  ],
+module.exports = {
+  darkMode: "class", // Enable class-based dark mode
   theme: {
     extend: {
       colors: {
-        // Common colors that don't change between modes
-        action: "#29F709", // Neon Green
-        "action-hover": "#24CC00", // Deep Green
-        info: "#CDDC39", // Lime
-        success: "#4CAF50", // Green
-        warning: "#FF9800", // Orange
-        error: "#F44336", // Red
+        // Light mode colors
+        "base-bg": "#F5F5F5",
+        "surface-bg": "#EEEEEE",
+        "primary-text": "#1C1C1C",
+        "secondary-text": "#757575",
+        action: "#29F709",
+        "action-hover": "#24CC00",
+        disabled: "#B3B3B3",
+        info: "#CDDC39",
+        link: "#38B000",
+        border: "#DDDDDD",
+        success: "#4CAF50",
+        warning: "#FF9800",
+        error: "#F44336",
+
+        // Dark mode colors
+        dark: {
+          "base-bg": "#121212",
+          "surface-bg": "#1C1C1C",
+          "primary-text": "#F5F5F5",
+          "secondary-text": "#CCCCCC",
+          action: "#29F709",
+          "action-hover": "#24CC00",
+          disabled: "#5A5A5A",
+          info: "#CDDC39",
+          link: "#7AEB42",
+          border: "#2E2E2E",
+          success: "#4CAF50",
+          warning: "#FF9800",
+          error: "#F44336",
+        },
       },
       boxShadow: {
-        light: "0 4px 6px rgba(0, 0, 0, 0.1)",
-        dark: "0 4px 6px rgba(255, 255, 255, 0.1)",
-      },
-      textColor: {
-        // Text colors that will be set via CSS variables
-        primary: "var(--text-primary)",
-        secondary: "var(--text-secondary)",
-      },
-      backgroundColor: {
-        // Background colors that will be set via CSS variables
-        base: "var(--base-bg)",
-        surface: "var(--surface-bg)",
-      },
-      borderColor: {
-        // Border colors that will be set via CSS variables
-        default: "var(--border)",
+        light: "0 2px 8px rgba(0, 0, 0, 0.1)",
+        dark: "0 2px 8px rgba(255, 255, 255, 0.1)",
       },
     },
   },
   plugins: [],
-  darkMode: "class",
 };

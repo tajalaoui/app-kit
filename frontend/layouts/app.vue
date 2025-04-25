@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="flex flex-col min-h-screen theme-transition"
-    :class="[colorMode === 'dark' ? 'dark' : '']"
-  >
+  <div class="flex flex-col min-h-screen theme-transition">
     <div class="flex flex-grow">
       <!-- Sidebar -->
       <AppSidebar
@@ -34,11 +31,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useColorMode } from "~/composables/useColorMode";
-
 const sidebarCollapsed = ref(false);
-const { colorMode } = useColorMode();
 
 const toggleSidebar = () => {
   sidebarCollapsed.value = !sidebarCollapsed.value;

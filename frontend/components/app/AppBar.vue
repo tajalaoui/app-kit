@@ -15,7 +15,7 @@
 
     <!-- App logo/title -->
     <div class="flex items-center px-4">
-      <span class="text-xl font-semibold text-primary ml-2"> SaaS App </span>
+      <span class="text-xl font-semibold text-primary ml-2"> App Kit </span>
     </div>
 
     <!-- Search box -->
@@ -33,12 +33,10 @@
     <div class="flex items-center space-x-1 mr-4">
       <!-- Theme toggle -->
       <Button
-        @click="toggleColorMode"
-        :icon="colorMode === 'dark' ? 'pi pi-sun' : 'pi pi-moon'"
-        text
-        rounded
-        class="p-button-text"
-        aria-label="Toggle theme"
+        @click="toggleTheme"
+        :label="isDark ? 'Switch to Light' : 'Switch to Dark'"
+        :icon="isDark ? 'pi pi-sun' : 'pi pi-moon'"
+        class="w-full"
       />
 
       <!-- Notifications -->
@@ -68,8 +66,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useColorMode } from "~/composables/useColorMode";
+const { isDark, toggleTheme } = useTheme();
 
 defineProps({
   sidebarCollapsed: {
@@ -81,7 +78,6 @@ defineProps({
 defineEmits(["toggle-sidebar"]);
 
 const menu = ref(null);
-const { colorMode, toggleColorMode } = useColorMode();
 
 const userMenuItems = [
   {
@@ -109,4 +105,13 @@ const userMenuItems = [
     },
   },
 ];
+
+const handleThemeChange = () => {
+  if (
+    (selectedTheme.value.value === "dark" && !isDark.value) ||
+    (selectedTheme.value.value === "light" && isDark.value)
+  ) {
+    toggleTheme();
+  }
+};
 </script>
