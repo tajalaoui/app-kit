@@ -1,18 +1,42 @@
 <template>
   <aside
-    class="fixed h-screen transition-all duration-200 bg-surface border-r border-default shadow-sm z-20 theme-transition"
-    :class="[collapsed ? 'w-16' : 'w-64']"
+    class="fixed h-screen transition-all duration-200 border-r z-20 theme-transition"
+    :class="[
+      collapsed ? 'w-16' : 'w-64',
+      mobileMenuOpen
+        ? 'translate-x-0 shadow-xl'
+        : '-translate-x-full md:translate-x-0 md:shadow-md',
+    ]"
+    style="
+      background-color: var(--surface-bg);
+      border-color: var(--border);
+      color: var(--primary-text);
+    "
   >
     <!-- Logo section -->
     <div
-      class="h-16 flex items-center justify-between px-4 border-b border-default theme-transition"
+      class="h-16 flex items-center justify-between px-4 border-b theme-transition"
+      style="border-color: var(--border)"
     >
       <div class="flex items-center">
-        <i class="pi pi-prime text-action text-xl"></i>
-        <span v-if="!collapsed" class="text-xl font-semibold ml-2 text-primary">
+        <i class="pi pi-prime text-xl" style="color: var(--action)"></i>
+        <span
+          v-if="!collapsed"
+          class="text-xl font-semibold ml-2"
+          style="color: var(--primary-text)"
+        >
           App Kit
         </span>
       </div>
+      <!-- Close button for mobile -->
+      <Button
+        v-if="!collapsed && isMobile"
+        @click="closeMobileMenu"
+        icon="pi pi-times"
+        text
+        rounded
+        aria-label="Close menu"
+      />
     </div>
 
     <!-- Navigation menu -->
@@ -27,11 +51,16 @@
         >
           <div
             @click="navigateTo(item)"
-            class="flex items-center px-4 py-3 cursor-pointer transition-colors duration-150 hover:bg-gray-100 dark:hover:bg-gray-800"
-            :class="[isActive ? 'bg-gray-100 dark:bg-gray-800' : '']"
+            class="flex items-center px-4 py-3 cursor-pointer transition-colors duration-150 menu-item"
+            :class="{ 'active-menu-item': isActive }"
           >
-            <i :class="[item.icon, 'text-action mr-3 text-xl']"></i>
-            <span v-if="!collapsed" class="text-primary">{{ item.label }}</span>
+            <i
+              :class="[item.icon, 'mr-3 text-xl']"
+              style="color: var(--action)"
+            ></i>
+            <span v-if="!collapsed" style="color: var(--primary-text)">{{
+              item.label
+            }}</span>
 
             <!-- Dropdown indicator for items with children -->
             <i
@@ -57,11 +86,17 @@
               v-slot="{ isActive }"
             >
               <div
-                class="flex items-center px-4 py-2 cursor-pointer transition-colors duration-150 hover:bg-gray-100 dark:hover:bg-gray-800"
-                :class="[isActive ? 'bg-gray-100 dark:bg-gray-800' : '']"
+                class="flex items-center px-4 py-2 cursor-pointer transition-colors duration-150 menu-item"
+                :class="{ 'active-menu-item': isActive }"
+                @click="isMobile && closeMobileMenu()"
               >
-                <i :class="[subItem.icon, 'text-action mr-3']"></i>
-                <span class="text-primary">{{ subItem.label }}</span>
+                <i
+                  :class="[subItem.icon, 'mr-3']"
+                  style="color: var(--action)"
+                ></i>
+                <span style="color: var(--primary-text)">{{
+                  subItem.label
+                }}</span>
               </div>
             </RouterLink>
           </div>
@@ -72,17 +107,25 @@
 </template>
 
 <script setup>
+import { useWindowSize } from "@vueuse/core";
+
 const props = defineProps({
   collapsed: {
     type: Boolean,
     default: false,
   },
+  mobileMenuOpen: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const emit = defineEmits(["toggle-sidebar"]);
+const emit = defineEmits(["toggle-sidebar", "close-mobile-menu"]);
 
 // Keep track of which menu items are expanded
 const expanded = ref({});
+const { width } = useWindowSize();
+const isMobile = computed(() => width.value < 768);
 
 // Menu items configuration
 const menuItems = [
@@ -125,17 +168,24 @@ const menuItems = [
   },
 ];
 
+// Close mobile menu helper
+const closeMobileMenu = () => {
+  emit("close-mobile-menu");
+};
+
 // Handle navigation and submenu toggling
 const navigateTo = (item) => {
   if (item.items && item.items.length) {
     // Toggle submenu if item has children
     expanded.value[item.label] = !expanded.value[item.label];
-  } else if (props.collapsed) {
-    // For non-parent items, if sidebar is collapsed, navigate directly
-    useRouter().push(item.to);
   } else {
-    // For non-parent items with expanded sidebar, navigate directly
+    // For non-parent items, navigate directly
     useRouter().push(item.to);
+
+    // Close menu if on mobile
+    if (isMobile.value) {
+      closeMobileMenu();
+    }
   }
 };
 
@@ -148,3 +198,13 @@ onMounted(() => {
   });
 });
 </script>
+
+<style scoped>
+.menu-item:hover {
+  background-color: rgba(128, 128, 128, 0.1);
+}
+
+.active-menu-item {
+  background-color: rgba(128, 128, 128, 0.2);
+}
+</style>

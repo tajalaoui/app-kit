@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="chart-container">
     <canvas ref="doughnutChart"></canvas>
   </div>
 </template>
@@ -7,23 +7,26 @@
 <script setup>
 import { ref, onMounted, watch } from "vue";
 import { useTheme } from "~/composables/useTheme";
+import { useWindowSize } from '@vueuse/core';
 
 const doughnutChart = ref(null);
 const { isDark } = useTheme();
+const { width } = useWindowSize();
 let chartInstance = null;
 
-// Mock data for the doughnut chart
+// Extended data for the doughnut chart
 const data = {
-  labels: ["Organic Search", "Direct", "Social Media", "Referral", "Email"],
+  labels: ["Organic Search", "Direct", "Social Media", "Referral", "Email", "Paid Ads"],
   datasets: [
     {
-      data: [35, 25, 20, 15, 5],
+      data: [35, 25, 18, 12, 6, 4],
       backgroundColor: [
         "#29F709", // Green (action color)
         "#4CAF50", // Success
         "#CDDC39", // Info
         "#FF9800", // Warning
         "#B3B3B3", // Disabled
+        "#F44336", // Error
       ],
       borderWidth: 0,
     },
@@ -43,6 +46,9 @@ const setupChart = () => {
 
   // Set the text color based on theme
   const textColor = isDark.value ? "#CCCCCC" : "#757575";
+  
+  // Check if on mobile
+  const isMobile = width.value < 768;
 
   // Create new chart instance
   chartInstance = new Chart(ctx, {
@@ -51,17 +57,18 @@ const setupChart = () => {
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      cutout: "70%",
+      cutout: isMobile ? "60%" : "70%",
       plugins: {
         legend: {
-          position: "right",
+          position: isMobile ? "bottom" : "right",
           labels: {
             color: textColor,
             font: {
-              size: 11,
+              size: isMobile ? 10 : 11,
             },
             usePointStyle: true,
-            padding: 20,
+            padding: isMobile ? 10 : 20,
+            boxWidth: isMobile ? 8 : 10,
           },
         },
         tooltip: {
@@ -91,8 +98,4 @@ onMounted(() => {
   });
 });
 
-// Update chart when theme changes
-watch(isDark, () => {
-  setupChart();
-});
-</script>
+// Update

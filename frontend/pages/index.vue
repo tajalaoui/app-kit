@@ -1,19 +1,25 @@
 <template>
   <div>
     <div class="mb-4">
-      <h1 class="text-2xl font-bold text-primary mb-2">Dashboard</h1>
-      <p class="text-secondary">Welcome to your App Kit dashboard</p>
+      <h1 class="text-xl md:text-2xl font-bold text-primary mb-2">Dashboard</h1>
+      <p class="text-secondary text-sm md:text-base">
+        Welcome to your App Kit dashboard
+      </p>
     </div>
 
-    <!-- Bento Grid Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-      <!-- Stats cards - span 1 column each -->
+    <!-- Bento Grid Layout with better mobile responsiveness -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6"
+    >
+      <!-- Stats cards - stack on mobile, 2 per row on tablet, 4 per row on desktop -->
       <Card class="shadow-sm theme-transition">
         <template #content>
           <div class="flex items-center">
             <i class="pi pi-users text-action mr-2 text-2xl"></i>
             <div>
-              <div class="text-2xl font-bold text-primary">1,280</div>
+              <div class="text-xl md:text-2xl font-bold text-primary">
+                1,280
+              </div>
               <div class="text-xs text-secondary">Users</div>
             </div>
           </div>
@@ -29,7 +35,9 @@
           <div class="flex items-center">
             <i class="pi pi-shopping-cart text-action mr-2 text-2xl"></i>
             <div>
-              <div class="text-2xl font-bold text-primary">$24.5k</div>
+              <div class="text-xl md:text-2xl font-bold text-primary">
+                $24.5k
+              </div>
               <div class="text-xs text-secondary">Revenue</div>
             </div>
           </div>
@@ -45,7 +53,7 @@
           <div class="flex items-center">
             <i class="pi pi-chart-line text-action mr-2 text-2xl"></i>
             <div>
-              <div class="text-2xl font-bold text-primary">32%</div>
+              <div class="text-xl md:text-2xl font-bold text-primary">32%</div>
               <div class="text-xs text-secondary">Growth</div>
             </div>
           </div>
@@ -61,7 +69,9 @@
           <div class="flex items-center">
             <i class="pi pi-check-circle text-action mr-2 text-2xl"></i>
             <div>
-              <div class="text-2xl font-bold text-primary">98.3%</div>
+              <div class="text-xl md:text-2xl font-bold text-primary">
+                98.3%
+              </div>
               <div class="text-xs text-secondary">Uptime</div>
             </div>
           </div>
@@ -74,8 +84,8 @@
         </template>
       </Card>
 
-      <!-- Line chart - span 2 columns -->
-      <Card class="shadow-sm theme-transition md:col-span-2">
+      <!-- Line chart - full width on mobile, 2 columns on larger screens -->
+      <Card class="shadow-sm theme-transition col-span-1 sm:col-span-2">
         <template #title>
           <div class="flex justify-between items-center">
             <span class="text-primary text-sm font-medium"
@@ -85,14 +95,14 @@
           </div>
         </template>
         <template #content>
-          <div class="h-64">
+          <div class="h-48 md:h-64">
             <LineChart />
           </div>
         </template>
       </Card>
 
-      <!-- Donut chart - span 2 columns -->
-      <Card class="shadow-sm theme-transition md:col-span-2">
+      <!-- Donut chart - full width on mobile, 2 columns on larger screens -->
+      <Card class="shadow-sm theme-transition col-span-1 sm:col-span-2">
         <template #title>
           <div class="flex justify-between items-center">
             <span class="text-primary text-sm font-medium"
@@ -102,14 +112,16 @@
           </div>
         </template>
         <template #content>
-          <div class="h-64">
+          <div class="h-48 md:h-64">
             <DoughnutChart />
           </div>
         </template>
       </Card>
 
       <!-- Activity table - span full width -->
-      <Card class="shadow-sm theme-transition md:col-span-4">
+      <Card
+        class="shadow-sm theme-transition col-span-1 sm:col-span-2 md:col-span-4"
+      >
         <template #title>
           <div class="flex justify-between items-center">
             <span class="text-primary text-sm font-medium"
@@ -124,6 +136,8 @@
             stripedRows
             class="p-datatable-sm"
             :rows="5"
+            responsiveLayout="stack"
+            breakpoint="576px"
           >
             <Column field="date" header="Date"></Column>
             <Column field="user" header="User"></Column>
