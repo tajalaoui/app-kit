@@ -5,9 +5,9 @@
   >
     <!-- Logo section -->
     <div
-      class="h-16 flex items-center justify-between border-default theme-transition"
+      class="h-16 flex items-center justify-between px-4 border-b border-default theme-transition"
     >
-      <div class="flex items-center px-4">
+      <div class="flex items-center">
         <i class="pi pi-prime text-action text-xl"></i>
         <span v-if="!collapsed" class="text-xl font-semibold ml-2 text-primary">
           App Kit
@@ -17,27 +17,74 @@
 
     <!-- Navigation menu -->
     <div class="py-4">
-      <PanelMenu
-        :model="menuItems"
-        class="sidebar-menu"
-        :class="{ 'collapsed-menu': collapsed }"
-      />
+      <nav class="space-y-1">
+        <RouterLink
+          v-for="item in menuItems"
+          :key="item.to"
+          :to="item.to"
+          v-slot="{ isActive }"
+          custom
+        >
+          <div
+            @click="navigateTo(item)"
+            class="flex items-center px-4 py-3 cursor-pointer transition-colors duration-150 hover:bg-gray-100 dark:hover:bg-gray-800"
+            :class="[isActive ? 'bg-gray-100 dark:bg-gray-800' : '']"
+          >
+            <i :class="[item.icon, 'text-action mr-3 text-xl']"></i>
+            <span v-if="!collapsed" class="text-primary">{{ item.label }}</span>
+
+            <!-- Dropdown indicator for items with children -->
+            <i
+              v-if="!collapsed && item.items && item.items.length"
+              :class="[
+                expanded[item.label]
+                  ? 'pi pi-chevron-down'
+                  : 'pi pi-chevron-right',
+                'ml-auto text-secondary',
+              ]"
+            ></i>
+          </div>
+
+          <!-- Submenu items (only show when parent is expanded and sidebar is not collapsed) -->
+          <div
+            v-if="!collapsed && item.items && expanded[item.label]"
+            class="pl-10 space-y-1"
+          >
+            <RouterLink
+              v-for="subItem in item.items"
+              :key="subItem.to"
+              :to="subItem.to"
+              v-slot="{ isActive }"
+            >
+              <div
+                class="flex items-center px-4 py-2 cursor-pointer transition-colors duration-150 hover:bg-gray-100 dark:hover:bg-gray-800"
+                :class="[isActive ? 'bg-gray-100 dark:bg-gray-800' : '']"
+              >
+                <i :class="[subItem.icon, 'text-action mr-3']"></i>
+                <span class="text-primary">{{ subItem.label }}</span>
+              </div>
+            </RouterLink>
+          </div>
+        </RouterLink>
+      </nav>
     </div>
   </aside>
 </template>
 
 <script setup>
-import { ref } from "vue";
-
-defineProps({
+const props = defineProps({
   collapsed: {
     type: Boolean,
     default: false,
   },
 });
 
-defineEmits(["toggle-sidebar"]);
+const emit = defineEmits(["toggle-sidebar"]);
 
+// Keep track of which menu items are expanded
+const expanded = ref({});
+
+// Menu items configuration
 const menuItems = [
   {
     label: "Dashboard",
@@ -57,6 +104,7 @@ const menuItems = [
   {
     label: "Settings",
     icon: "pi pi-cog",
+    to: "/settings",
     items: [
       {
         label: "Account",
@@ -76,32 +124,27 @@ const menuItems = [
     ],
   },
 ];
+
+// Handle navigation and submenu toggling
+const navigateTo = (item) => {
+  if (item.items && item.items.length) {
+    // Toggle submenu if item has children
+    expanded.value[item.label] = !expanded.value[item.label];
+  } else if (props.collapsed) {
+    // For non-parent items, if sidebar is collapsed, navigate directly
+    useRouter().push(item.to);
+  } else {
+    // For non-parent items with expanded sidebar, navigate directly
+    useRouter().push(item.to);
+  }
+};
+
+// Initialize expanded state
+onMounted(() => {
+  menuItems.forEach((item) => {
+    if (item.items && item.items.length) {
+      expanded.value[item.label] = false;
+    }
+  });
+});
 </script>
-
-<style scoped>
-.sidebar-menu :deep(.p-panelmenu-header-link) {
-  padding: 0.75rem 1rem;
-}
-
-.sidebar-menu :deep(.p-menuitem-icon) {
-  font-size: 1.25rem;
-}
-
-.collapsed-menu :deep(.p-panelmenu-header-link .p-menuitem-text),
-.collapsed-menu :deep(.p-panelmenu-header-link .p-submenu-icon) {
-  display: none;
-}
-
-.collapsed-menu :deep(.p-panelmenu-content) {
-  display: none;
-}
-
-.collapsed-menu :deep(.p-panelmenu-header-link) {
-  justify-content: center;
-  padding: 0.75rem 0;
-}
-
-.sidebar-menu :deep(.p-component) {
-  width: 100%;
-}
-</style>

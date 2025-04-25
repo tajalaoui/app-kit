@@ -18,35 +18,31 @@
       <span class="text-xl font-semibold text-primary ml-2"> App Kit </span>
     </div>
 
-    <!-- Search box -->
-    <div class="flex-grow mx-4 hidden md:block">
+    <!-- Search box (centered) -->
+    <div class="flex-grow mx-4 flex justify-center">
       <span class="p-input-icon-left w-full max-w-md">
-        <i class="pi pi-search" />
-        <InputText
-          placeholder="Search..."
-          class="w-50 !bg-white dark:!bg-surface-bg-dark"
-        />
+        <InputText placeholder="Search..." class="w-full" />
       </span>
     </div>
 
     <!-- Right side controls -->
-    <div class="flex items-center space-x-1 mr-4">
-      <!-- Theme toggle -->
+    <div class="flex items-center space-x-3 mr-4">
+      <!-- Theme toggle - icon only -->
       <Button
         @click="toggleTheme"
-        :label="isDark ? 'Switch to Light' : 'Switch to Dark'"
         :icon="isDark ? 'pi pi-sun' : 'pi pi-moon'"
-        class="w-full"
+        text
+        rounded
+        class="p-2"
+        aria-label="Toggle theme"
       />
 
       <!-- Notifications -->
       <Button
         icon="pi pi-bell"
-        text
+        variant="text"
         rounded
-        badge="2"
-        badge-class="p-badge-danger"
-        aria-label="Notifications"
+        aria-label="Notification"
       />
 
       <!-- User menu -->
@@ -57,8 +53,8 @@
         class="flex items-center"
         text
       >
-        <Avatar icon="pi pi-user" class="mr-2" size="normal" />
-        <span class="font-medium text-primary hidden sm:inline">User Name</span>
+        <Avatar icon="pi pi-user" class="mr-2" shape="circle" size="normal" />
+        <span class="font-medium text-primary hidden sm:inline">Admin</span>
         <i class="pi pi-angle-down ml-2"></i>
       </Button>
     </div>
@@ -105,13 +101,4 @@ const userMenuItems = [
     },
   },
 ];
-
-const handleThemeChange = () => {
-  if (
-    (selectedTheme.value.value === "dark" && !isDark.value) ||
-    (selectedTheme.value.value === "light" && isDark.value)
-  ) {
-    toggleTheme();
-  }
-};
 </script>

@@ -2,21 +2,22 @@
   <div>
     <div class="mb-4">
       <h1 class="text-2xl font-bold text-primary mb-2">Dashboard</h1>
-      <p class="text-secondary">Welcome to your SaaS dashboard</p>
+      <p class="text-secondary">Welcome to your App Kit dashboard</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-      <!-- Stats cards -->
+    <!-- Bento Grid Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <!-- Stats cards - span 1 column each -->
       <Card class="shadow-sm theme-transition">
-        <template #title>
-          <div class="flex items-center">
-            <i class="pi pi-users text-action mr-2"></i>
-            <span class="text-primary">Users</span>
-          </div>
-        </template>
         <template #content>
-          <div class="text-3xl font-bold text-primary">1,280</div>
-          <div class="text-sm text-secondary mt-2">
+          <div class="flex items-center">
+            <i class="pi pi-users text-action mr-2 text-2xl"></i>
+            <div>
+              <div class="text-2xl font-bold text-primary">1,280</div>
+              <div class="text-xs text-secondary">Users</div>
+            </div>
+          </div>
+          <div class="text-xs text-secondary mt-2">
             <span class="text-success"><i class="pi pi-arrow-up"></i> 12%</span>
             from last month
           </div>
@@ -24,15 +25,15 @@
       </Card>
 
       <Card class="shadow-sm theme-transition">
-        <template #title>
-          <div class="flex items-center">
-            <i class="pi pi-shopping-cart text-action mr-2"></i>
-            <span class="text-primary">Revenue</span>
-          </div>
-        </template>
         <template #content>
-          <div class="text-3xl font-bold text-primary">$24,500</div>
-          <div class="text-sm text-secondary mt-2">
+          <div class="flex items-center">
+            <i class="pi pi-shopping-cart text-action mr-2 text-2xl"></i>
+            <div>
+              <div class="text-2xl font-bold text-primary">$24.5k</div>
+              <div class="text-xs text-secondary">Revenue</div>
+            </div>
+          </div>
+          <div class="text-xs text-secondary mt-2">
             <span class="text-success"><i class="pi pi-arrow-up"></i> 8%</span>
             from last month
           </div>
@@ -40,52 +41,109 @@
       </Card>
 
       <Card class="shadow-sm theme-transition">
-        <template #title>
-          <div class="flex items-center">
-            <i class="pi pi-chart-line text-action mr-2"></i>
-            <span class="text-primary">Growth</span>
-          </div>
-        </template>
         <template #content>
-          <div class="text-3xl font-bold text-primary">32%</div>
-          <div class="text-sm text-secondary mt-2">
+          <div class="flex items-center">
+            <i class="pi pi-chart-line text-action mr-2 text-2xl"></i>
+            <div>
+              <div class="text-2xl font-bold text-primary">32%</div>
+              <div class="text-xs text-secondary">Growth</div>
+            </div>
+          </div>
+          <div class="text-xs text-secondary mt-2">
             <span class="text-success"><i class="pi pi-arrow-up"></i> 5%</span>
             from last month
           </div>
         </template>
       </Card>
-    </div>
 
-    <!-- Main content section -->
-    <Card class="shadow-sm theme-transition">
-      <template #title>
-        <div class="flex justify-between items-center">
-          <span class="text-primary">Recent Activity</span>
-          <Button label="View All" icon="pi pi-arrow-right" text />
-        </div>
-      </template>
-      <template #content>
-        <DataTable :value="activities" stripedRows class="p-datatable-sm">
-          <Column field="date" header="Date"></Column>
-          <Column field="user" header="User"></Column>
-          <Column field="action" header="Action"></Column>
-          <Column field="status" header="Status">
-            <template #body="slotProps">
-              <Tag
-                :severity="getStatusSeverity(slotProps.data.status)"
-                :value="slotProps.data.status"
-              />
-            </template>
-          </Column>
-        </DataTable>
-      </template>
-    </Card>
+      <Card class="shadow-sm theme-transition">
+        <template #content>
+          <div class="flex items-center">
+            <i class="pi pi-check-circle text-action mr-2 text-2xl"></i>
+            <div>
+              <div class="text-2xl font-bold text-primary">98.3%</div>
+              <div class="text-xs text-secondary">Uptime</div>
+            </div>
+          </div>
+          <div class="text-xs text-secondary mt-2">
+            <span class="text-success"
+              ><i class="pi pi-arrow-up"></i> 1.2%</span
+            >
+            from last month
+          </div>
+        </template>
+      </Card>
+
+      <!-- Line chart - span 2 columns -->
+      <Card class="shadow-sm theme-transition md:col-span-2">
+        <template #title>
+          <div class="flex justify-between items-center">
+            <span class="text-primary text-sm font-medium"
+              >Monthly Revenue</span
+            >
+            <Button icon="pi pi-ellipsis-v" text rounded aria-label="Options" />
+          </div>
+        </template>
+        <template #content>
+          <div class="h-64">
+            <LineChart />
+          </div>
+        </template>
+      </Card>
+
+      <!-- Donut chart - span 2 columns -->
+      <Card class="shadow-sm theme-transition md:col-span-2">
+        <template #title>
+          <div class="flex justify-between items-center">
+            <span class="text-primary text-sm font-medium"
+              >Traffic Sources</span
+            >
+            <Button icon="pi pi-ellipsis-v" text rounded aria-label="Options" />
+          </div>
+        </template>
+        <template #content>
+          <div class="h-64">
+            <DoughnutChart />
+          </div>
+        </template>
+      </Card>
+
+      <!-- Activity table - span full width -->
+      <Card class="shadow-sm theme-transition md:col-span-4">
+        <template #title>
+          <div class="flex justify-between items-center">
+            <span class="text-primary text-sm font-medium"
+              >Recent Activity</span
+            >
+            <Button label="View All" icon="pi pi-arrow-right" text />
+          </div>
+        </template>
+        <template #content>
+          <DataTable
+            :value="activities"
+            stripedRows
+            class="p-datatable-sm"
+            :rows="5"
+          >
+            <Column field="date" header="Date"></Column>
+            <Column field="user" header="User"></Column>
+            <Column field="action" header="Action"></Column>
+            <Column field="status" header="Status">
+              <template #body="slotProps">
+                <Tag
+                  :severity="getStatusSeverity(slotProps.data.status)"
+                  :value="slotProps.data.status"
+                />
+              </template>
+            </Column>
+          </DataTable>
+        </template>
+      </Card>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-
 // Set app layout
 definePageMeta({
   layout: "app",

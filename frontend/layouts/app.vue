@@ -20,6 +20,7 @@
 
         <!-- Main content -->
         <main class="flex-grow p-4 transition-colors duration-200">
+          <!-- Page content -->
           <slot />
         </main>
 
@@ -31,9 +32,30 @@
 </template>
 
 <script setup>
+import { ref, onMounted, watch } from "vue";
+
+// Initialize sidebar state from localStorage or default to false (expanded)
 const sidebarCollapsed = ref(false);
 
+// Toggle sidebar and save state to localStorage
 const toggleSidebar = () => {
   sidebarCollapsed.value = !sidebarCollapsed.value;
+  localStorage.setItem(
+    "sidebarCollapsed",
+    JSON.stringify(sidebarCollapsed.value)
+  );
 };
+
+// Load sidebar state from localStorage on component mount
+onMounted(() => {
+  const savedState = localStorage.getItem("sidebarCollapsed");
+  if (savedState !== null) {
+    sidebarCollapsed.value = JSON.parse(savedState);
+  }
+});
+
+// Watch for changes to save to localStorage
+watch(sidebarCollapsed, (newValue) => {
+  localStorage.setItem("sidebarCollapsed", JSON.stringify(newValue));
+});
 </script>
