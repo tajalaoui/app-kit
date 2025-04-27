@@ -84,7 +84,10 @@ const closeMobileMenu = () => {
 onMounted(() => {
   const savedState = localStorage.getItem("sidebarCollapsed");
   if (savedState !== null) {
-    sidebarCollapsed.value = JSON.parse(savedState);
+    // Only apply saved state on desktop
+    if (!isMobile.value) {
+      sidebarCollapsed.value = JSON.parse(savedState);
+    }
   }
 
   // On mobile, always start with closed sidebar

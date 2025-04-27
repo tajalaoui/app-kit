@@ -8,6 +8,4 @@
   </footer>
 </template>
 
-<script setup>
-// Footer component logic goes here
-</script>
+<script setup></script>

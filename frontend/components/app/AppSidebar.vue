@@ -2,7 +2,7 @@
   <aside
     class="fixed h-screen transition-all duration-200 border-r z-20 theme-transition"
     :class="[
-      collapsed ? 'w-16' : 'w-64',
+      !isMobile && collapsed ? 'w-16' : 'w-64',
       mobileMenuOpen
         ? 'translate-x-0 shadow-xl'
         : '-translate-x-full md:translate-x-0 md:shadow-md',
@@ -21,7 +21,7 @@
       <div class="flex items-center">
         <i class="pi pi-prime text-xl" style="color: var(--action)"></i>
         <span
-          v-if="!collapsed"
+          v-if="!collapsed || isMobile"
           class="text-xl font-semibold ml-2"
           style="color: var(--primary-text)"
         >
@@ -58,25 +58,30 @@
               :class="[item.icon, 'mr-3 text-xl']"
               style="color: var(--action)"
             ></i>
-            <span v-if="!collapsed" style="color: var(--primary-text)">{{
-              item.label
-            }}</span>
+            <span
+              v-if="!collapsed || isMobile"
+              style="color: var(--primary-text)"
+              >{{ item.label }}</span
+            >
 
             <!-- Dropdown indicator for items with children -->
             <i
-              v-if="!collapsed && item.items && item.items.length"
+              v-if="(!collapsed || isMobile) && item.items && item.items.length"
               :class="[
                 expanded[item.label]
                   ? 'pi pi-chevron-down'
                   : 'pi pi-chevron-right',
-                'ml-auto text-secondary',
+                'ml-auto',
               ]"
+              style="color: var(--secondary-text)"
             ></i>
           </div>
 
-          <!-- Submenu items (only show when parent is expanded and sidebar is not collapsed) -->
+          <!-- Submenu items (only show when parent is expanded and sidebar is not collapsed or on mobile) -->
           <div
-            v-if="!collapsed && item.items && expanded[item.label]"
+            v-if="
+              (!collapsed || isMobile) && item.items && expanded[item.label]
+            "
             class="pl-10 space-y-1"
           >
             <RouterLink
