@@ -8,6 +8,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: "Satoshi", sans-serif;
   text-wrap: balance;
 }
 
@@ -17,4 +18,3 @@ figcaption {
   text-wrap: pretty;
   max-width: 65ch;
 }
-

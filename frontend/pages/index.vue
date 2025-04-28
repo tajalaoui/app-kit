@@ -96,7 +96,7 @@
         </template>
         <template #content>
           <div class="h-48 md:h-64">
-            <LineChart />
+            <LineChartComponent />
           </div>
         </template>
       </Card>
@@ -113,15 +113,13 @@
         </template>
         <template #content>
           <div class="h-48 md:h-64">
-            <DoughnutChart />
+            <DoughnutChartComponent />
           </div>
         </template>
       </Card>
 
       <!-- Activity table - span full width -->
-      <Card
-        class="shadow-sm col-span-1 sm:col-span-2 md:col-span-4"
-      >
+      <Card class="shadow-sm col-span-1 sm:col-span-2 md:col-span-4">
         <template #title>
           <div class="flex justify-between items-center">
             <span class="text-primary text-sm font-medium"
@@ -158,6 +156,10 @@
 </template>
 
 <script setup>
+// Explicitly import the chart components
+import LineChartComponent from "~/components/charts/LineChart.vue";
+import DoughnutChartComponent from "~/components/charts/DoughnutChart.vue";
+
 // Set app layout
 definePageMeta({
   layout: "app",

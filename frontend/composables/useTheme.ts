@@ -1,4 +1,4 @@
-// composables/useTheme.js
+// composables/useTheme.ts
 import { ref, onMounted, watch } from "vue";
 
 export function useTheme() {
@@ -42,16 +42,18 @@ export function useTheme() {
     if (linkElement) {
       // Replace light theme with dark theme and vice versa
       const href = linkElement.getAttribute("href");
-      if (isDark.value && href.includes("lara-light-green")) {
-        linkElement.setAttribute(
-          "href",
-          href.replace("lara-light-green", "lara-dark-green")
-        );
-      } else if (!isDark.value && href.includes("lara-dark-green")) {
-        linkElement.setAttribute(
-          "href",
-          href.replace("lara-dark-green", "lara-light-green")
-        );
+      if (href) {
+        if (isDark.value && href.includes("crown-light")) {
+          linkElement.setAttribute(
+            "href",
+            href.replace("crown-light", "crown-dark")
+          );
+        } else if (!isDark.value && href.includes("crown-dark")) {
+          linkElement.setAttribute(
+            "href",
+            href.replace("crown-dark", "crown-light")
+          );
+        }
       }
     }
   };
@@ -70,7 +72,7 @@ export function useTheme() {
   onMounted(() => {
     initTheme();
 
-    // Optional: Listen for system theme changes
+    // Listen for system theme changes
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (e) => {

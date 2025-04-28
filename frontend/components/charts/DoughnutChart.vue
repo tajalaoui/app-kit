@@ -1,101 +1,120 @@
 <template>
   <div class="chart-container">
-    <canvas ref="doughnutChart"></canvas>
+    <Chart type="doughnut" :data="chartData" :options="chartOptions" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useTheme } from "~/composables/useTheme";
-import { useWindowSize } from '@vueuse/core';
+import { useWindowSize } from "@vueuse/core";
 
-const doughnutChart = ref(null);
 const { isDark } = useTheme();
 const { width } = useWindowSize();
-let chartInstance = null;
 
-// Extended data for the doughnut chart
-const data = {
-  labels: ["Organic Search", "Direct", "Social Media", "Referral", "Email", "Paid Ads"],
-  datasets: [
-    {
-      data: [35, 25, 18, 12, 6, 4],
-      backgroundColor: [
-        "#29F709", // Green (action color)
-        "#4CAF50", // Success
-        "#CDDC39", // Info
-        "#FF9800", // Warning
-        "#B3B3B3", // Disabled
-        "#F44336", // Error
-      ],
-      borderWidth: 0,
-    },
-  ],
+// Compute if on mobile
+const isMobile = computed(() => width.value < 768);
+
+// Get CSS variable safely with fallback
+const getCssVar = (name, fallback) => {
+  // Only try to access document if we're in the browser
+  if (typeof document !== "undefined") {
+    const value = getComputedStyle(document.documentElement)
+      .getPropertyValue(name)
+      .trim();
+    return value || fallback;
+  }
+  return fallback;
 };
 
-// Setup and render the chart
-const setupChart = () => {
-  if (!doughnutChart.value) return;
+// Data for the doughnut chart
+const chartData = computed(() => {
+  // Only access these in the browser
+  const colorValues = [];
 
-  const ctx = doughnutChart.value.getContext("2d");
-
-  // Destroy existing chart if it exists
-  if (chartInstance) {
-    chartInstance.destroy();
+  // This will only run on client-side
+  if (typeof window !== "undefined") {
+    colorValues.push(getCssVar("--action", "#29F709")); // Action
+    colorValues.push(getCssVar("--success", "#4CAF50")); // Success
+    colorValues.push(getCssVar("--info", "#CDDC39")); // Info
+    colorValues.push(getCssVar("--warning", "#FF9800")); // Warning
+    colorValues.push(getCssVar("--disabled", "#B3B3B3")); // Disabled
+    colorValues.push(getCssVar("--error", "#F44336")); // Error
+  } else {
+    // Fallback colors for SSR
+    colorValues.push(
+      "#29F709",
+      "#4CAF50",
+      "#CDDC39",
+      "#FF9800",
+      "#B3B3B3",
+      "#F44336"
+    );
   }
 
-  // Set the text color based on theme
-  const textColor = isDark.value ? "#CCCCCC" : "#757575";
-  
-  // Check if on mobile
-  const isMobile = width.value < 768;
+  return {
+    labels: [
+      "Organic Search",
+      "Direct",
+      "Social Media",
+      "Referral",
+      "Email",
+      "Paid Ads",
+    ],
+    datasets: [
+      {
+        data: [35, 25, 18, 12, 6, 4],
+        backgroundColor: colorValues,
+        borderWidth: 0,
+      },
+    ],
+  };
+});
 
-  // Create new chart instance
-  chartInstance = new Chart(ctx, {
-    type: "doughnut",
-    data: data,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      cutout: isMobile ? "60%" : "70%",
-      plugins: {
-        legend: {
-          position: isMobile ? "bottom" : "right",
-          labels: {
-            color: textColor,
-            font: {
-              size: isMobile ? 10 : 11,
-            },
-            usePointStyle: true,
-            padding: isMobile ? 10 : 20,
-            boxWidth: isMobile ? 8 : 10,
+// Chart options with theme-aware colors
+const chartOptions = computed(() => {
+  // Set the text color based on theme
+  const textColor = getCssVar(
+    "--secondary-text",
+    isDark.value ? "#CCCCCC" : "#757575"
+  );
+
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    cutout: isMobile.value ? "60%" : "70%",
+    plugins: {
+      legend: {
+        position: isMobile.value ? "bottom" : "right",
+        labels: {
+          color: textColor,
+          font: {
+            size: isMobile.value ? 10 : 11,
           },
+          usePointStyle: true,
+          padding: isMobile.value ? 10 : 20,
+          boxWidth: isMobile.value ? 8 : 10,
         },
-        tooltip: {
-          callbacks: {
-            label: function (context) {
-              const value = context.parsed;
-              const total = context.dataset.data.reduce((a, b) => a + b, 0);
-              const percentage = Math.round((value / total) * 100);
-              return `${context.label}: ${percentage}%`;
-            },
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            const value = context.parsed;
+            const total = context.dataset.data.reduce((a, b) => a + b, 0);
+            const percentage = Math.round((value / total) * 100);
+            return `${context.label}: ${percentage}%`;
           },
         },
       },
     },
-  });
-};
-
-// Initialize chart on component mount
-onMounted(() => {
-  // Import Chart.js dynamically to avoid SSR issues
-  import("chart.js").then((Chart) => {
-    // Register required Chart.js components
-    Chart.Chart.register(Chart.ArcElement, Chart.Tooltip, Chart.Legend);
-
-    // Setup chart
-    setupChart();
-  });
+  };
 });
+</script>
 
-// Update
+<style scoped>
+.chart-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+</style>

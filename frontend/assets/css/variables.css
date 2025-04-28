@@ -1,35 +1,77 @@
+/* Single source of truth for CSS variables */
 :root {
-  /* Light Mode */
+  /* Light Theme (Default) */
   --base-bg: #f5f5f5;
   --surface-bg: #eeeeee;
   --primary-text: #1c1c1c;
-  --secondary-text: #757575;
-  --action-color: #29f709;
-  --action-hover: #24cc00;
-  --disabled-state: #b3b3b3;
-  --info-color: #cddc39;
-  --link-color: #38b000;
-  --border-color: #dddddd;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-  --success-color: #4caf50;
-  --warning-color: #ff9800;
-  --error-color: #f44336;
+  --secondary-text: #5c5c5c;
+  --action: #34c759;
+  --action-hover: #009900;
+  --disabled: #b3b3b3;
+  --info: #cddc39;
+  --link: #007a00;
+  --border: #dddddd;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --success: #3a9d3a;
+  --warning: #e68a00;
+  --error: #f44336;
 }
 
-.dark-mode {
-  /* Dark Mode */
+/* Dark theme variables */
+.dark-theme,
+.dark {
   --base-bg: #121212;
   --surface-bg: #1c1c1c;
   --primary-text: #f5f5f5;
   --secondary-text: #cccccc;
-  --action-color: #29f709;
-  --action-hover: #24cc00;
-  --disabled-state: #5a5a5a;
-  --info-color: #cddc39;
-  --link-color: #7aeb42;
-  --border-color: #2e2e2e;
-  --shadow-color: rgba(255, 255, 255, 0.1);
-  --success-color: #4caf50;
-  --warning-color: #ff9800;
-  --error-color: #f44336;
+  --action: #30d158;
+  --action-hover: #28c25d;
+  --disabled: #5a5a5a;
+  --info: #cddc39;
+  --link: #36d466;
+  --border: #2e2e2e;
+  --shadow: rgba(255, 255, 255, 0.1);
+  --success: #43b543;
+  --warning: #ffb74d;
+  --error: #f44336;
+}
+
+/* Theme transition for smooth mode switching */
+.theme-transition {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* Apply themed styles to common elements */
+body {
+  background-color: var(--base-bg);
+  color: var(--primary-text);
+}
+
+.card,
+.panel,
+.modal {
+  background-color: var(--surface-bg);
+  border-color: var(--border);
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+a {
+  color: var(--link);
+}
+
+.text-secondary {
+  color: var(--secondary-text);
+}
+
+.btn-primary {
+  background-color: var(--action);
+}
+
+.btn-primary:hover {
+  background-color: var(--action-hover);
+}
+
+.btn-disabled {
+  background-color: var(--disabled);
 }
