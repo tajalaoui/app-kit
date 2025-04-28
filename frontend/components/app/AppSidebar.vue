@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="fixed h-screen transition-all duration-200 border-r z-20 theme-transition"
+    class="fixed h-screen transition-all duration-200 border-r z-20"
     :class="[
       !isMobile && collapsed ? 'w-16' : 'w-64',
       mobileMenuOpen
@@ -15,7 +15,7 @@
   >
     <!-- Logo section -->
     <div
-      class="h-16 flex items-center justify-between px-4 border-b theme-transition"
+      class="h-16 flex items-center justify-between px-4 border-b"
       style="border-color: var(--border)"
     >
       <div class="flex items-center">

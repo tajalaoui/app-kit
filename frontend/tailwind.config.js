@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       colors: {
         // Light mode colors
+        // "--primary-color": "#29f709",
         "base-bg": "#F5F5F5",
         "surface-bg": "#EEEEEE",
         "primary-text": "#1C1C1C",
@@ -20,6 +21,7 @@ module.exports = {
 
         // Dark mode colors
         dark: {
+          // "--primary-color": "#29f709",
           "base-bg": "#121212",
           "surface-bg": "#1C1C1C",
           "primary-text": "#F5F5F5",

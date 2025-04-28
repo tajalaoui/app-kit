@@ -12,7 +12,7 @@
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-6"
     >
       <!-- Stats cards - stack on mobile, 2 per row on tablet, 4 per row on desktop -->
-      <Card class="shadow-sm theme-transition">
+      <Card class="shadow-sm">
         <template #content>
           <div class="flex items-center">
             <i class="pi pi-users text-action mr-2 text-2xl"></i>
@@ -30,7 +30,7 @@
         </template>
       </Card>
 
-      <Card class="shadow-sm theme-transition">
+      <Card class="shadow-sm">
         <template #content>
           <div class="flex items-center">
             <i class="pi pi-shopping-cart text-action mr-2 text-2xl"></i>
@@ -48,7 +48,7 @@
         </template>
       </Card>
 
-      <Card class="shadow-sm theme-transition">
+      <Card class="shadow-sm">
         <template #content>
           <div class="flex items-center">
             <i class="pi pi-chart-line text-action mr-2 text-2xl"></i>
@@ -64,7 +64,7 @@
         </template>
       </Card>
 
-      <Card class="shadow-sm theme-transition">
+      <Card class="shadow-sm">
         <template #content>
           <div class="flex items-center">
             <i class="pi pi-check-circle text-action mr-2 text-2xl"></i>
@@ -85,7 +85,7 @@
       </Card>
 
       <!-- Line chart - full width on mobile, 2 columns on larger screens -->
-      <Card class="shadow-sm theme-transition col-span-1 sm:col-span-2">
+      <Card class="shadow-sm col-span-1 sm:col-span-2">
         <template #title>
           <div class="flex justify-between items-center">
             <span class="text-primary text-sm font-medium"
@@ -102,7 +102,7 @@
       </Card>
 
       <!-- Donut chart - full width on mobile, 2 columns on larger screens -->
-      <Card class="shadow-sm theme-transition col-span-1 sm:col-span-2">
+      <Card class="shadow-sm col-span-1 sm:col-span-2">
         <template #title>
           <div class="flex justify-between items-center">
             <span class="text-primary text-sm font-medium"
@@ -120,7 +120,7 @@
 
       <!-- Activity table - span full width -->
       <Card
-        class="shadow-sm theme-transition col-span-1 sm:col-span-2 md:col-span-4"
+        class="shadow-sm col-span-1 sm:col-span-2 md:col-span-4"
       >
         <template #title>
           <div class="flex justify-between items-center">

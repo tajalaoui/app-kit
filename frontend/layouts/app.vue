@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen theme-transition">
+  <div class="flex flex-col min-h-screen">
     <div class="flex flex-grow">
       <!-- Mobile overlay when sidebar is open -->
       <div
