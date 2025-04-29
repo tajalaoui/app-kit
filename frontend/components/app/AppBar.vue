@@ -1,6 +1,7 @@
 <template>
   <header
     class="h-16 flex items-center transition-colors duration-200 border-b shadow-sm"
+    style="border-color: var(--border)"
   >
     <!-- Sidebar toggle button - behavior differs on mobile vs desktop -->
     <Button

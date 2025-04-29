@@ -35,4 +35,27 @@ export default definePreset(Aura, {
       },
     },
   },
+
+  card: {
+    root: {
+      class: "app-card", // You can add custom classes here
+    },
+    body: { class: "" },
+    title: { class: "" },
+    content: { class: "" },
+  },
+  datatable: {
+    root: { class: "app-datatable" },
+    header: { class: "" },
+    table: { class: "" },
+    thead: { class: "" },
+    tbody: { class: "" },
+    tfoot: { class: "" },
+  },
+  inputtext: {
+    root: { class: "app-input" },
+  },
+  button: {
+    root: { class: "app-button" },
+  },
 });

@@ -8,7 +8,7 @@
         : '-translate-x-full md:translate-x-0 md:shadow-md',
     ]"
     style="
-      background-color: var(--surface-bg);
+      background-color: var(--base-bg);
       border-color: var(--border);
       color: var(--primary-text);
     "

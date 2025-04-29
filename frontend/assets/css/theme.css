@@ -1,8 +1,19 @@
-/* PrimeVue simplified theme variables override */
-
+/* 2. PRIMEVUE CORE THEME MAPPING - Replace your theme.css with this */
 :root {
-  /* Surface colors (controls backgrounds of components) */
-  --surface-0: var(--surface-bg);
+  /* PrimeVue REQUIRES these specific variable names for its components */
+
+  /* Surface colors - CRITICAL for components like Card, DataTable, etc. */
+  --surface-a: var(--surface-bg); /* Main surface color */
+  --surface-b: var(
+    --base-bg
+  ); /* Secondary surface (usually lighter/darker than main) */
+  --surface-c: var(--border); /* Borders and dividers */
+  --surface-d: var(--border); /* Stronger borders */
+  --surface-e: var(--surface-bg); /* Overlay surfaces (dialogs, etc) */
+  --surface-f: var(--surface-bg); /* Cards, panels foreground */
+
+  /* Component backgrounds using PrimeVue's numbered system */
+  --surface-0: var(--surface-bg); /* Base surface */
   --surface-50: var(--surface-bg);
   --surface-100: var(--surface-bg);
   --surface-200: var(--surface-bg);
@@ -14,7 +25,21 @@
   --surface-800: var(--primary-text);
   --surface-900: var(--primary-text);
 
-  /* Primary color (controls many interactive elements) */
+  /* Ensure all PrimeVue component containers use these colors */
+  --surface-ground: var(--base-bg); /* Page background */
+  --surface-section: var(--surface-bg); /* Section backgrounds */
+  --surface-card: var(--surface-bg); /* Card backgrounds */
+  --surface-overlay: var(
+    --surface-bg
+  ); /* Overlay backgrounds (modals, dropdowns) */
+  --surface-border: var(--border); /* All component borders */
+  --surface-hover: rgba(0, 0, 0, 0.04); /* Hover states */
+
+  /* Text colors */
+  --text-color: var(--primary-text); /* Primary text */
+  --text-color-secondary: var(--secondary-text); /* Secondary text */
+
+  /* Primary colors for interaction elements */
   --primary-50: var(--action);
   --primary-100: var(--action);
   --primary-200: var(--action);
@@ -26,25 +51,52 @@
   --primary-800: var(--action-hover);
   --primary-900: var(--action-hover);
 
-  /* Text colors */
-  --text-color: var(--primary-text);
-  --text-color-secondary: var(--secondary-text);
-
-  /* Other key variables */
-  --surface-ground: var(--base-bg);
-  --surface-section: var(--surface-bg);
-  --surface-card: var(--surface-bg);
-  --surface-overlay: var(--surface-bg);
-  --surface-border: var(--border);
-  --surface-hover: rgba(0, 0, 0, 0.04);
-
-  /* Focus ring (accessibility) */
+  /* Focus ring */
   --focus-ring: 0 0 0 2px var(--action-hover);
+
+  /* STATE COLORS */
+  /* These are essential for proper component state handling */
+
+  /* Success, Info, Warning, Danger - used by many components */
+  --green-500: var(--success);
+  --yellow-500: var(--warning);
+  --red-500: var(--error);
+  --blue-500: var(--info);
+
+  /* Additional colors for inputs, etc. */
+  --content-padding: 1rem; /* Standard padding */
+  --inline-spacing: 0.5rem; /* Spacing between inline elements */
+  --border-radius: 4px; /* Standard border radius */
+
+  /* Input specific styling - critical for forms */
+  --input-bg: var(--surface-bg);
+  --input-text-color: var(--primary-text);
+  --input-border-color: var(--border);
+  --input-hover-border-color: var(--action);
+  --input-focus-border-color: var(--action);
+  --input-error-border-color: var(--error);
+
+  /* Table colors - essential for DataTable */
+  --data-table-header-bg: var(--surface-bg);
+  --data-table-header-text-color: var(--primary-text);
+  --data-table-body-row-bg: var(--surface-bg);
+  --data-table-body-row-text-color: var(--primary-text);
+  --data-table-body-row-even-bg: var(--base-bg);
+  --data-table-border-color: var(--border);
 }
 
-/* Dark theme variables - automatically applied when dark theme is active */
+/* Dark theme specific PrimeVue mapping */
 .dark-theme:root,
 .dark:root {
+  /* Surface and component backgrounds */
+  --surface-a: var(--surface-bg);
+  --surface-b: var(--base-bg);
+  --surface-c: var(--border);
+  --surface-d: var(--border);
+  --surface-e: var(--surface-bg);
+  --surface-f: var(--surface-bg);
+
+  /* Component backgrounds using PrimeVue's numbered system */
   --surface-0: var(--surface-bg);
   --surface-50: var(--surface-bg);
   --surface-100: var(--surface-bg);
@@ -57,6 +109,7 @@
   --surface-800: var(--primary-text);
   --surface-900: var(--primary-text);
 
+  /* Ensure all containers use these colors */
   --surface-ground: var(--base-bg);
   --surface-section: var(--surface-bg);
   --surface-card: var(--surface-bg);
@@ -64,5 +117,63 @@
   --surface-border: var(--border);
   --surface-hover: rgba(255, 255, 255, 0.1);
 
-  /* Text color remains the same because it's already handled by CSS variables */
+  /* Text colors remain mapped to variables */
+  /* Primary colors remain mapped to action variables */
+
+  /* Input specific styling for dark mode */
+  --input-bg: var(--surface-bg);
+  --input-text-color: var(--primary-text);
+  --input-border-color: var(--border);
+
+  /* Table colors for dark mode */
+  --data-table-header-bg: var(--surface-bg);
+  --data-table-header-text-color: var(--primary-text);
+  --data-table-body-row-bg: var(--surface-bg);
+  --data-table-body-row-text-color: var(--primary-text);
+  --data-table-body-row-even-bg: var(--base-bg);
+  --data-table-border-color: var(--border);
+}
+
+/* 3. COMPONENT-SPECIFIC OVERRIDES - Only use these if absolutely necessary */
+
+/* DataTable specific styling */
+.p-datatable .p-datatable-thead > tr > th {
+  background-color: var(--data-table-header-bg);
+  color: var(--data-table-header-text-color);
+  border-color: var(--data-table-border-color);
+}
+
+.p-datatable .p-datatable-tbody > tr {
+  background-color: var(--data-table-body-row-bg);
+  color: var(--data-table-body-row-text-color);
+}
+
+.p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background-color: var(--data-table-body-row-even-bg);
+}
+
+/* Card specific */
+.p-card {
+  background-color: var(--surface-card);
+  color: var(--text-color);
+}
+
+.p-card .p-card-title {
+  color: var(--text-color);
+}
+
+.p-card .p-card-subtitle {
+  color: var(--text-color-secondary);
+}
+
+/* Input styling */
+.p-inputtext {
+  background-color: var(--input-bg);
+  color: var(--input-text-color);
+  border-color: var(--input-border-color);
+}
+
+/* Table styling beyond basic colors */
+.p-datatable-table {
+  background-color: var(--surface-card);
 }
