@@ -131,8 +131,6 @@
         <template #content>
           <DataTable
             :value="activities"
-            stripedRows
-            class="p-datatable-sm"
             :rows="5"
             responsiveLayout="stack"
             breakpoint="576px"

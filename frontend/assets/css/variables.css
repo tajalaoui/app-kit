@@ -1,16 +1,34 @@
 :root {
-  /* Keep your existing light theme variables as-is */
-  --base-bg: #f5f5f5;
-  --surface-bg: #ffffff; /* Changed from #eeeeee to pure white for better contrast */
-  --primary-text: #1c1c1c;
-  --secondary-text: #5c5c5c;
-  --action: #34c759;
-  --action-hover: #009900;
+  /* Base Colors - Light Theme */
+  --base-bg: #f5f5f5; /* Main background */
+  --surface-bg: #ffffff; /* Surface/Card background */
+  --surface-bg-50: #fafafa; /* Very light surface for striping */
+
+  /* Text Colors */
+  --primary-text: #1c1c1c; /* Main text */
+  --secondary-text: #5c5c5c; /* Secondary text */
+
+  /* Action Colors with Gradients */
+  --action: #34c759; /* Main action color - Apple green */
+  --action-50: #f2f9f2; /* Very light variant */
+  --action-100: #e2f5e5; /* Light background */
+  --action-200: #ccedcf; /* Light active */
+  --action-300: #9ddea2; /* Mid-light */
+  --action-400: #66d97c; /* Medium */
+  --action-600: #28b14a; /* Medium-dark */
+  --action-hover: #009900; /* Hover state */
+  --action-800: #16802f; /* Dark */
+  --action-900: #0f6223; /* Very dark */
+  --action-950: #084d18; /* Deepest shade */
+
+  /* UI Element Colors */
   --disabled: #b3b3b3;
   --info: #cddc39;
   --link: #007a00;
   --border: #dddddd;
   --shadow: rgba(0, 0, 0, 0.1);
+
+  /* Status Colors */
   --success: #3a9d3a;
   --warning: #e68a00;
   --error: #f44336;
@@ -18,18 +36,36 @@
 
 .dark-theme,
 .dark {
-  /* Keep your existing dark theme variables as-is */
-  --base-bg: #121212;
-  --surface-bg: #1c1c1c;
-  --primary-text: #f5f5f5;
-  --secondary-text: #cccccc;
-  --action: #30d158;
-  --action-hover: #28c25d;
+  /* Base Colors - Dark Theme */
+  --base-bg: #121212; /* Main background */
+  --surface-bg: #1c1c1c; /* Surface/Card background */
+  --surface-bg-50: #252525; /* Slightly lighter surface for striping */
+
+  /* Text Colors */
+  --primary-text: #f5f5f5; /* Main text */
+  --secondary-text: #cccccc; /* Secondary text */
+
+  /* Action Colors */
+  --action: #30d158; /* Main action color */
+  --action-50: #0f261a; /* Very dark variant */
+  --action-100: #152f1e; /* Dark background */
+  --action-200: #1b3d25; /* Dark active */
+  --action-300: #245332; /* Mid-dark */
+  --action-400: #2c6a40; /* Medium-dark */
+  --action-600: #28aa50; /* Medium-light */
+  --action-hover: #28c25d; /* Hover state */
+  --action-800: #36d466; /* Light */
+  --action-900: #4edb7a; /* Lighter */
+  --action-950: #67e08d; /* Lightest shade */
+
+  /* UI Element Colors */
   --disabled: #5a5a5a;
   --info: #cddc39;
   --link: #36d466;
   --border: #2e2e2e;
   --shadow: rgba(255, 255, 255, 0.1);
+
+  /* Status Colors */
   --success: #43b543;
   --warning: #ffb74d;
   --error: #f44336;
@@ -38,21 +74,23 @@
 /* Theme transition for smooth mode switching */
 .theme-transition {
   transition: background-color 0.3s ease, color 0.3s ease,
-    border-color 0.3s ease;
+    border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Apply themed styles to common elements */
+/* Basic element styling */
 body {
   background-color: var(--base-bg);
   color: var(--primary-text);
 }
 
+/* Common component styling */
 .card,
 .panel,
 .modal {
   background-color: var(--surface-bg);
   border-color: var(--border);
   box-shadow: 0 2px 8px var(--shadow);
+  border-radius: 4px;
 }
 
 a {
@@ -63,8 +101,10 @@ a {
   color: var(--secondary-text);
 }
 
+/* Button states */
 .btn-primary {
   background-color: var(--action);
+  color: white;
 }
 
 .btn-primary:hover {
@@ -73,4 +113,5 @@ a {
 
 .btn-disabled {
   background-color: var(--disabled);
+  cursor: not-allowed;
 }

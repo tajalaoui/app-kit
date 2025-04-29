@@ -1,31 +1,32 @@
-/* 2. PRIMEVUE CORE THEME MAPPING - Replace your theme.css with this */
+/* PRIMEVUE CORE THEME MAPPING - Refactored for better consistency */
 :root {
-  /* PrimeVue REQUIRES these specific variable names for its components */
-
-  /* Surface colors - CRITICAL for components like Card, DataTable, etc. */
+  /* SURFACE COLORS - Critical for components like Card, DataTable, etc. */
   --surface-a: var(--surface-bg); /* Main surface color */
   --surface-b: var(
     --base-bg
-  ); /* Secondary surface (usually lighter/darker than main) */
+  ); /* Secondary surface - important for striped tables */
   --surface-c: var(--border); /* Borders and dividers */
   --surface-d: var(--border); /* Stronger borders */
   --surface-e: var(--surface-bg); /* Overlay surfaces (dialogs, etc) */
   --surface-f: var(--surface-bg); /* Cards, panels foreground */
 
-  /* Component backgrounds using PrimeVue's numbered system */
+  /* NUMBERED SYSTEM - Used by PrimeVue for various component states */
   --surface-0: var(--surface-bg); /* Base surface */
-  --surface-50: var(--surface-bg);
-  --surface-100: var(--surface-bg);
-  --surface-200: var(--surface-bg);
-  --surface-300: var(--border);
-  --surface-400: var(--border);
-  --surface-500: var(--secondary-text);
-  --surface-600: var(--secondary-text);
-  --surface-700: var(--primary-text);
-  --surface-800: var(--primary-text);
-  --surface-900: var(--primary-text);
+  --surface-50: var(
+    --surface-bg-50,
+    #fafafa
+  ); /* Very light variant (custom fallback) */
+  --surface-100: var(--surface-bg); /* Light background */
+  --surface-200: var(--surface-bg); /* Light background active */
+  --surface-300: var(--border); /* Border color */
+  --surface-400: var(--border); /* Border color (emphasized) */
+  --surface-500: var(--secondary-text); /* Secondary text */
+  --surface-600: var(--secondary-text); /* Secondary text (emphasized) */
+  --surface-700: var(--primary-text); /* Primary text */
+  --surface-800: var(--primary-text); /* Primary text (emphasized) */
+  --surface-900: var(--primary-text); /* Strong text */
 
-  /* Ensure all PrimeVue component containers use these colors */
+  /* SEMANTIC SURFACES - Used directly by components */
   --surface-ground: var(--base-bg); /* Page background */
   --surface-section: var(--surface-bg); /* Section backgrounds */
   --surface-card: var(--surface-bg); /* Card backgrounds */
@@ -33,42 +34,40 @@
     --surface-bg
   ); /* Overlay backgrounds (modals, dropdowns) */
   --surface-border: var(--border); /* All component borders */
-  --surface-hover: rgba(0, 0, 0, 0.04); /* Hover states */
+  --surface-hover: rgba(0, 0, 0, 0.04); /* Hover states - light */
 
-  /* Text colors */
+  /* TEXT COLORS */
   --text-color: var(--primary-text); /* Primary text */
   --text-color-secondary: var(--secondary-text); /* Secondary text */
 
-  /* Primary colors for interaction elements */
-  --primary-50: var(--action);
-  --primary-100: var(--action);
-  --primary-200: var(--action);
-  --primary-300: var(--action);
-  --primary-400: var(--action);
-  --primary-500: var(--action);
-  --primary-600: var(--action-hover);
-  --primary-700: var(--action-hover);
-  --primary-800: var(--action-hover);
-  --primary-900: var(--action-hover);
+  /* PRIMARY COLORS - For buttons and interactive elements */
+  --primary-50: var(--action-50, #f2f9f2); /* Very light primary */
+  --primary-100: var(--action-100, #e2f5e5); /* Light primary background */
+  --primary-200: var(--action-200, #ccedcf); /* Light primary active */
+  --primary-300: var(--action-300, #9ddea2); /* Mid-light primary */
+  --primary-400: var(--action-400, #66d97c); /* Medium primary */
+  --primary-500: var(--action); /* Base primary color */
+  --primary-600: var(--action-hover); /* Hover state */
+  --primary-700: var(--action-hover); /* Active state */
+  --primary-800: var(--action-800, #16802f); /* Dark primary */
+  --primary-900: var(--action-900, #0f6223); /* Very dark primary */
+  --primary-950: var(--action-950, #084d18); /* Deepest primary */
 
-  /* Focus ring */
+  /* FOCUS STATES */
   --focus-ring: 0 0 0 2px var(--action-hover);
 
-  /* STATE COLORS */
-  /* These are essential for proper component state handling */
-
-  /* Success, Info, Warning, Danger - used by many components */
+  /* STATE COLORS - For alerts, validation, etc. */
   --green-500: var(--success);
   --yellow-500: var(--warning);
   --red-500: var(--error);
   --blue-500: var(--info);
 
-  /* Additional colors for inputs, etc. */
+  /* COMPONENT SPACING */
   --content-padding: 1rem; /* Standard padding */
   --inline-spacing: 0.5rem; /* Spacing between inline elements */
   --border-radius: 4px; /* Standard border radius */
 
-  /* Input specific styling - critical for forms */
+  /* INPUT STYLING - For forms */
   --input-bg: var(--surface-bg);
   --input-text-color: var(--primary-text);
   --input-border-color: var(--border);
@@ -76,19 +75,22 @@
   --input-focus-border-color: var(--action);
   --input-error-border-color: var(--error);
 
-  /* Table colors - essential for DataTable */
+  /* TABLE SPECIFIC VARIABLES - For DataTable component */
   --data-table-header-bg: var(--surface-bg);
   --data-table-header-text-color: var(--primary-text);
   --data-table-body-row-bg: var(--surface-bg);
   --data-table-body-row-text-color: var(--primary-text);
-  --data-table-body-row-even-bg: var(--base-bg);
+  --data-table-body-row-even-bg: var(
+    --surface-50,
+    #fafafa
+  ); /* Fixed for light theme */
   --data-table-border-color: var(--border);
 }
 
-/* Dark theme specific PrimeVue mapping */
+/* DARK THEME OVERRIDES */
 .dark-theme:root,
 .dark:root {
-  /* Surface and component backgrounds */
+  /* SURFACE COLORS */
   --surface-a: var(--surface-bg);
   --surface-b: var(--base-bg);
   --surface-c: var(--border);
@@ -96,9 +98,12 @@
   --surface-e: var(--surface-bg);
   --surface-f: var(--surface-bg);
 
-  /* Component backgrounds using PrimeVue's numbered system */
+  /* NUMBERED SYSTEM */
   --surface-0: var(--surface-bg);
-  --surface-50: var(--surface-bg);
+  --surface-50: var(
+    --surface-bg-50,
+    #252525
+  ); /* Dark variant for stripes (custom fallback) */
   --surface-100: var(--surface-bg);
   --surface-200: var(--surface-bg);
   --surface-300: var(--border);
@@ -109,57 +114,62 @@
   --surface-800: var(--primary-text);
   --surface-900: var(--primary-text);
 
-  /* Ensure all containers use these colors */
+  /* SEMANTIC SURFACES */
   --surface-ground: var(--base-bg);
   --surface-section: var(--surface-bg);
   --surface-card: var(--surface-bg);
   --surface-overlay: var(--surface-bg);
   --surface-border: var(--border);
-  --surface-hover: rgba(255, 255, 255, 0.1);
+  --surface-hover: rgba(255, 255, 255, 0.1); /* Hover states - dark */
 
-  /* Text colors remain mapped to variables */
-  /* Primary colors remain mapped to action variables */
-
-  /* Input specific styling for dark mode */
-  --input-bg: var(--surface-bg);
-  --input-text-color: var(--primary-text);
-  --input-border-color: var(--border);
-
-  /* Table colors for dark mode */
+  /* TABLE SPECIFIC VARIABLES - Updated for dark theme */
   --data-table-header-bg: var(--surface-bg);
   --data-table-header-text-color: var(--primary-text);
   --data-table-body-row-bg: var(--surface-bg);
   --data-table-body-row-text-color: var(--primary-text);
-  --data-table-body-row-even-bg: var(--base-bg);
+  --data-table-body-row-even-bg: var(
+    --surface-50,
+    #252525
+  ); /* Fixed for dark theme */
   --data-table-border-color: var(--border);
 }
 
-/* 3. COMPONENT-SPECIFIC OVERRIDES - Only use these if absolutely necessary */
+/* COMPONENT-SPECIFIC OVERRIDES - Only essential ones */
 
-/* DataTable specific styling */
+/* DataTable styling */
 .p-datatable .p-datatable-thead > tr > th {
   background-color: var(--data-table-header-bg);
   color: var(--data-table-header-text-color);
   border-color: var(--data-table-border-color);
+  font-weight: 600;
+  padding: 0.75rem 1rem;
 }
 
 .p-datatable .p-datatable-tbody > tr {
   background-color: var(--data-table-body-row-bg);
   color: var(--data-table-body-row-text-color);
+  transition: background-color 0.2s;
 }
 
 .p-datatable .p-datatable-tbody > tr:nth-child(even) {
   background-color: var(--data-table-body-row-even-bg);
 }
 
-/* Card specific */
+.p-datatable .p-datatable-tbody > tr:hover {
+  background-color: var(--surface-hover);
+}
+
+/* Card styling */
 .p-card {
   background-color: var(--surface-card);
   color: var(--text-color);
+  box-shadow: 0 2px 8px var(--shadow);
+  border-radius: var(--border-radius);
 }
 
 .p-card .p-card-title {
   color: var(--text-color);
+  font-weight: 600;
 }
 
 .p-card .p-card-subtitle {
@@ -171,9 +181,15 @@
   background-color: var(--input-bg);
   color: var(--input-text-color);
   border-color: var(--input-border-color);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Table styling beyond basic colors */
-.p-datatable-table {
-  background-color: var(--surface-card);
+.p-inputtext:hover {
+  border-color: var(--input-hover-border-color);
+}
+
+.p-inputtext:focus {
+  outline: 0 none;
+  border-color: var(--input-focus-border-color);
+  box-shadow: var(--focus-ring);
 }

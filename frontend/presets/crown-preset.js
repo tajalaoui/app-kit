@@ -5,57 +5,64 @@ import Aura from "@primevue/themes/aura";
 // Define your custom preset extending Aura theme
 export default definePreset(Aura, {
   name: "crown",
-  // Color palette definition
+
+  // Color palette definition using Apple-inspired greens
   semantic: {
     primary: {
-      50: "#F2F9F2", // Very light, Apple's lightest UI green tint
-      100: "#E2F5E5", // Light background hover
-      200: "#CCEDCF", // Light background active
-      300: "#9DDEA2", // Light accent
-      400: "#66D97C", // Medium accent
-      500: "#34C759", // Apple's iOS system green (base color)
-      600: "#28B14A", // Slightly darker for hover states
-      700: "#1D9A3D", // Darker for active states
-      800: "#16802F", // Deep green for text on light backgrounds
-      900: "#0F6223", // Very deep green for emphasized elements
-      950: "#084D18", // Darkest shade for special cases
+      50: "var(--action-50)", // Very light green tint
+      100: "var(--action-100)", // Light background hover
+      200: "var(--action-200)", // Light background active
+      300: "var(--action-300)", // Light accent
+      400: "var(--action-400)", // Medium accent
+      500: "var(--action)", // Apple's iOS system green (base color)
+      600: "var(--action-600)", // Slightly darker for hover states
+      700: "var(--action-hover)", // Darker for active states
+      800: "var(--action-800)", // Deep green for text on light backgrounds
+      900: "var(--action-900)", // Very deep green for emphasized elements
+      950: "var(--action-950)", // Darkest shade for special cases
     },
-    // You can customize other colors if needed
-    info: "#CDDC39",
-    success: "#4CAF50",
-    warning: "#FF9800",
-    danger: "#F44336", // For error states
-  },
-  // Optional: Override specific component styles
-  components: {
-    // Example: Customize button
-    button: {
-      root: {
-        // Custom styles for buttons
-      },
+
+    // Status colors mapping from your CSS variables
+    info: {
+      500: "var(--info)",
+    },
+    success: {
+      500: "var(--success)",
+    },
+    warning: {
+      500: "var(--warning)",
+    },
+    danger: {
+      500: "var(--error)",
+    },
+
+    // Surface colors
+    surface: {
+      0: "var(--surface-bg)",
+      50: "var(--surface-bg-50)",
+      100: "var(--surface-bg)",
+      200: "var(--surface-bg)",
+      300: "var(--border)",
+      400: "var(--border)",
+      500: "var(--secondary-text)",
+      600: "var(--secondary-text)",
+      700: "var(--primary-text)",
+      800: "var(--primary-text)",
+      900: "var(--primary-text)",
+      ground: "var(--base-bg)",
+      section: "var(--surface-bg)",
+      card: "var(--surface-bg)",
+      overlay: "var(--surface-bg)",
+      border: "var(--border)",
     },
   },
 
-  card: {
-    root: {
-      class: "app-card", // You can add custom classes here
-    },
-    body: { class: "" },
-    title: { class: "" },
-    content: { class: "" },
-  },
-  datatable: {
-    root: { class: "app-datatable" },
-    header: { class: "" },
-    table: { class: "" },
-    thead: { class: "" },
-    tbody: { class: "" },
-    tfoot: { class: "" },
-  },
-  inputtext: {
-    root: { class: "app-input" },
-  },
-  button: {
-    root: { class: "app-button" },
+  // Global transitions for the entire theme
+  global: {
+    css: `
+      * {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+      }
+    `,
   },
 });
