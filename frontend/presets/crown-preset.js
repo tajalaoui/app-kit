@@ -1,5 +1,5 @@
 // presets/crown-preset.js
-import { definePreset } from "@primeuix/themes";
+import { definePreset } from "@primevue/themes";
 import Aura from "@primevue/themes/aura";
 
 // Define your custom preset extending Aura theme

@@ -1,4 +1,3 @@
-/* PRIMEVUE CORE THEME MAPPING - Refactored for better consistency */
 :root {
   /* SURFACE COLORS - Critical for components like Card, DataTable, etc. */
   --surface-a: var(--surface-bg); /* Main surface color */
@@ -10,7 +9,7 @@
   --surface-e: var(--surface-bg); /* Overlay surfaces (dialogs, etc) */
   --surface-f: var(--surface-bg); /* Cards, panels foreground */
 
-  /* NUMBERED SYSTEM - Used by PrimeVue for various component states */
+  /* NUMBERED SYSTEM - Optimized with fewer redundant mappings */
   --surface-0: var(--surface-bg); /* Base surface */
   --surface-50: var(
     --surface-bg-50,
@@ -26,7 +25,7 @@
   --surface-800: var(--primary-text); /* Primary text (emphasized) */
   --surface-900: var(--primary-text); /* Strong text */
 
-  /* SEMANTIC SURFACES - Used directly by components */
+  /* SEMANTIC SURFACES - For direct component usage */
   --surface-ground: var(--base-bg); /* Page background */
   --surface-section: var(--surface-bg); /* Section backgrounds */
   --surface-card: var(--surface-bg); /* Card backgrounds */
@@ -39,6 +38,12 @@
   /* TEXT COLORS */
   --text-color: var(--primary-text); /* Primary text */
   --text-color-secondary: var(--secondary-text); /* Secondary text */
+
+  /* TYPOGRAPHY VARIABLES - New section */
+  --font-family: "Inter", sans-serif;
+  --font-family-heading: "Satoshi", sans-serif;
+  --font-size-base: 1rem;
+  --line-height-base: 1.5;
 
   /* PRIMARY COLORS - For buttons and interactive elements */
   --primary-50: var(--action-50, #f2f9f2); /* Very light primary */
@@ -85,6 +90,10 @@
     #fafafa
   ); /* Fixed for light theme */
   --data-table-border-color: var(--border);
+
+  /* ANIMATION VARIABLES - New section */
+  --transition-duration: 0.3s;
+  --transition-timing: ease;
 }
 
 /* DARK THEME OVERRIDES */
