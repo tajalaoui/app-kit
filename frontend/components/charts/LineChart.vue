@@ -17,13 +17,14 @@ const isMobile = computed(() => width.value < 768);
 
 // Data for the chart
 const chartData = computed(() => {
-  // Get the computed colors directly from CSS variables
-  const actionColor = getComputedStyle(document.documentElement)
-    .getPropertyValue("--action")
-    .trim();
-  const warningColor = getComputedStyle(document.documentElement)
-    .getPropertyValue("--warning")
-    .trim();
+  // Only access getComputedStyle in the browser
+  let actionColor = "#29F709";
+  let warningColor = "#FF9800";
+  if (typeof window !== "undefined") {
+    const styles = getComputedStyle(document.documentElement);
+    actionColor = styles.getPropertyValue("--action").trim() || actionColor;
+    warningColor = styles.getPropertyValue("--warning").trim() || warningColor;
+  }
 
   return {
     labels: [
@@ -47,7 +48,7 @@ const chartData = computed(() => {
           12500, 19200, 15800, 23400, 18300, 24500, 26800, 21200, 25600, 27300,
           24100, 29800,
         ],
-        borderColor: actionColor || "#29F709",
+        borderColor: actionColor,
         backgroundColor: actionColor
           ? `${actionColor}20`
           : "rgba(41, 247, 9, 0.1)", // Adding transparency
@@ -60,7 +61,7 @@ const chartData = computed(() => {
           8200, 10500, 9800, 12400, 11700, 13200, 12900, 13800, 12200, 14500,
           13800, 15200,
         ],
-        borderColor: warningColor || "#FF9800",
+        borderColor: warningColor,
         backgroundColor: warningColor
           ? `${warningColor}20`
           : "rgba(255, 152, 0, 0.1)", // Adding transparency
@@ -77,10 +78,13 @@ const chartOptions = computed(() => {
   const gridColor = isDark.value
     ? "rgba(255, 255, 255, 0.1)"
     : "rgba(0, 0, 0, 0.1)";
-  const textColor =
-    getComputedStyle(document.documentElement)
-      .getPropertyValue("--secondary-text")
-      .trim() || (isDark.value ? "#CCCCCC" : "#757575");
+  let textColor = isDark.value ? "#CCCCCC" : "#757575";
+  if (typeof window !== "undefined") {
+    textColor =
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--secondary-text")
+        .trim() || textColor;
+  }
 
   return {
     responsive: true,
