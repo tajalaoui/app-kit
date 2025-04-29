@@ -5,52 +5,47 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useTheme } from "~/composables/useTheme";
 import { useWindowSize } from "@vueuse/core";
 
 const { isDark } = useTheme();
 const { width } = useWindowSize();
-
-// Compute if on mobile
 const isMobile = computed(() => width.value < 768);
 
-// Get CSS variable safely with fallback
+// Get CSS variable safely
 const getCssVar = (name, fallback) => {
-  // Only try to access document if we're in the browser
-  if (typeof document !== "undefined") {
-    const value = getComputedStyle(document.documentElement)
-      .getPropertyValue(name)
-      .trim();
-    return value || fallback;
-  }
-  return fallback;
+  if (typeof document === "undefined") return fallback;
+  return (
+    getComputedStyle(document.documentElement).getPropertyValue(name).trim() ||
+    fallback
+  );
 };
 
-// Data for the doughnut chart
+// Chart data with theme colors
 const chartData = computed(() => {
-  // Only access these in the browser
-  const colorValues = [];
+  // Default color values for SSR
+  const defaultColors = [
+    "#34c759",
+    "#3a9d3a",
+    "#cddc39",
+    "#e68a00",
+    "#b3b3b3",
+    "#f44336",
+  ];
 
-  // This will only run on client-side
-  if (typeof window !== "undefined") {
-    colorValues.push(getCssVar("--action", "#29F709")); // Action
-    colorValues.push(getCssVar("--success", "#4CAF50")); // Success
-    colorValues.push(getCssVar("--info", "#CDDC39")); // Info
-    colorValues.push(getCssVar("--warning", "#FF9800")); // Warning
-    colorValues.push(getCssVar("--disabled", "#B3B3B3")); // Disabled
-    colorValues.push(getCssVar("--error", "#F44336")); // Error
-  } else {
-    // Fallback colors for SSR
-    colorValues.push(
-      "#29F709",
-      "#4CAF50",
-      "#CDDC39",
-      "#FF9800",
-      "#B3B3B3",
-      "#F44336"
-    );
-  }
+  // Get theme colors when in browser
+  const colorValues =
+    typeof window !== "undefined"
+      ? [
+          getCssVar("--action", defaultColors[0]),
+          getCssVar("--success", defaultColors[1]),
+          getCssVar("--info", defaultColors[2]),
+          getCssVar("--warning", defaultColors[3]),
+          getCssVar("--disabled", defaultColors[4]),
+          getCssVar("--error", defaultColors[5]),
+        ]
+      : defaultColors;
 
   return {
     labels: [
@@ -71,9 +66,8 @@ const chartData = computed(() => {
   };
 });
 
-// Chart options with theme-aware colors
+// Chart options with theme-aware settings
 const chartOptions = computed(() => {
-  // Set the text color based on theme
   const textColor = getCssVar(
     "--secondary-text",
     isDark.value ? "#CCCCCC" : "#757575"
@@ -98,7 +92,7 @@ const chartOptions = computed(() => {
       },
       tooltip: {
         callbacks: {
-          label: function (context) {
+          label: (context) => {
             const value = context.parsed;
             const total = context.dataset.data.reduce((a, b) => a + b, 0);
             const percentage = Math.round((value / total) * 100);

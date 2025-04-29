@@ -5,25 +5,31 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { computed } from "vue";
 import { useTheme } from "~/composables/useTheme";
 import { useWindowSize } from "@vueuse/core";
 
 const { isDark } = useTheme();
 const { width } = useWindowSize();
-
-// Compute if on mobile
 const isMobile = computed(() => width.value < 768);
 
-// Data for the chart
+// Get CSS variable safely
+const getCssVar = (name, fallback) => {
+  if (typeof document === "undefined") return fallback;
+  return (
+    getComputedStyle(document.documentElement).getPropertyValue(name).trim() ||
+    fallback
+  );
+};
+
+// Chart data with theme-aware colors
 const chartData = computed(() => {
-  // Only access getComputedStyle in the browser
-  let actionColor = "#29F709";
-  let warningColor = "#FF9800";
+  let actionColor = "#34c759"; // Default color
+  let warningColor = "#e68a00"; // Default color
+
   if (typeof window !== "undefined") {
-    const styles = getComputedStyle(document.documentElement);
-    actionColor = styles.getPropertyValue("--action").trim() || actionColor;
-    warningColor = styles.getPropertyValue("--warning").trim() || warningColor;
+    actionColor = getCssVar("--action", actionColor);
+    warningColor = getCssVar("--warning", warningColor);
   }
 
   return {
@@ -49,9 +55,7 @@ const chartData = computed(() => {
           24100, 29800,
         ],
         borderColor: actionColor,
-        backgroundColor: actionColor
-          ? `${actionColor}20`
-          : "rgba(41, 247, 9, 0.1)", // Adding transparency
+        backgroundColor: `${actionColor}20`, // 20% opacity
         tension: 0.4,
         fill: true,
       },
@@ -62,9 +66,7 @@ const chartData = computed(() => {
           13800, 15200,
         ],
         borderColor: warningColor,
-        backgroundColor: warningColor
-          ? `${warningColor}20`
-          : "rgba(255, 152, 0, 0.1)", // Adding transparency
+        backgroundColor: `${warningColor}20`, // 20% opacity
         tension: 0.4,
         fill: true,
       },
@@ -72,19 +74,15 @@ const chartData = computed(() => {
   };
 });
 
-// Chart options with theme-aware colors
+// Chart options with theme-aware settings
 const chartOptions = computed(() => {
-  // Set the chart colors based on theme
   const gridColor = isDark.value
     ? "rgba(255, 255, 255, 0.1)"
     : "rgba(0, 0, 0, 0.1)";
-  let textColor = isDark.value ? "#CCCCCC" : "#757575";
-  if (typeof window !== "undefined") {
-    textColor =
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--secondary-text")
-        .trim() || textColor;
-  }
+  const textColor = getCssVar(
+    "--secondary-text",
+    isDark.value ? "#CCCCCC" : "#757575"
+  );
 
   return {
     responsive: true,
@@ -92,27 +90,20 @@ const chartOptions = computed(() => {
     scales: {
       y: {
         beginAtZero: true,
-        grid: {
-          color: gridColor,
-        },
+        grid: { color: gridColor },
         ticks: {
           color: textColor,
-          // Show fewer ticks on mobile
           maxTicksLimit: isMobile.value ? 4 : 8,
-          callback: function (value) {
-            return "$" + value / 1000 + "k";
-          },
+          callback: (value) => `$${value / 1000}k`,
         },
       },
       x: {
         grid: {
           color: gridColor,
-          // Hide vertical grid on mobile
           display: !isMobile.value,
         },
         ticks: {
           color: textColor,
-          // Show fewer labels on mobile
           maxRotation: isMobile.value ? 45 : 0,
           maxTicksLimit: isMobile.value ? 6 : 12,
         },
@@ -130,9 +121,7 @@ const chartOptions = computed(() => {
       },
       tooltip: {
         callbacks: {
-          label: function (context) {
-            return "$" + context.parsed.y.toLocaleString();
-          },
+          label: (context) => `$${context.parsed.y.toLocaleString()}`,
         },
       },
     },

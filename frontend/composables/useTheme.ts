@@ -6,48 +6,30 @@ export function useTheme() {
 
   const initTheme = () => {
     const savedTheme = localStorage.getItem("theme");
-
-    if (savedTheme) {
-      isDark.value = savedTheme === "dark";
-    } else {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      isDark.value = prefersDark;
-    }
-
+    isDark.value =
+      savedTheme === "dark" ||
+      (!savedTheme &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches);
     applyTheme();
   };
 
   const applyTheme = () => {
-    if (isDark.value) {
-      document.documentElement.classList.add("dark-theme");
-      document.documentElement.classList.add("dark"); // For Tailwind dark mode
-    } else {
-      document.documentElement.classList.remove("dark-theme");
-      document.documentElement.classList.remove("dark");
-    }
-
+    document.documentElement.classList.toggle("dark-theme", isDark.value);
+    document.documentElement.classList.toggle("dark", isDark.value);
     localStorage.setItem("theme", isDark.value ? "dark" : "light");
 
     // Update PrimeVue theme
     const linkId = "theme-css";
-    let linkElement = document.getElementById(linkId);
+    const linkElement = document.getElementById(linkId);
 
-    if (linkElement) {
-      const href = linkElement.getAttribute("href");
-      if (href) {
-        if (isDark.value && href.includes("crown-light")) {
-          linkElement.setAttribute(
-            "href",
-            href.replace("crown-light", "crown-dark")
-          );
-        } else if (!isDark.value && href.includes("crown-dark")) {
-          linkElement.setAttribute(
-            "href",
-            href.replace("crown-dark", "crown-light")
-          );
-        }
+    if (linkElement?.getAttribute("href")) {
+      const href = linkElement.getAttribute("href") || "";
+      const newHref = isDark.value
+        ? href.replace("crown-light", "crown-dark")
+        : href.replace("crown-dark", "crown-light");
+
+      if (newHref !== href) {
+        linkElement.setAttribute("href", newHref);
       }
     }
   };
@@ -56,14 +38,12 @@ export function useTheme() {
     isDark.value = !isDark.value;
   };
 
-  // Watch for changes and apply theme
-  watch(isDark, () => {
-    applyTheme();
-  });
+  watch(isDark, applyTheme);
 
   onMounted(() => {
     initTheme();
 
+    // Listen for system theme changes
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (e) => {

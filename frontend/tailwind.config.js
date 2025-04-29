@@ -1,10 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: "class", // Enable class-based dark mode
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        // Use CSS variables for colors to maintain a single source of truth
         "base-bg": "var(--base-bg)",
         "surface-bg": "var(--surface-bg)",
         "primary-text": "var(--primary-text)",
@@ -24,7 +23,11 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    // Optional: you could add tailwindcss-primeui here if needed
+  content: [
+    "./components/**/*.{js,vue,ts}",
+    "./layouts/**/*.vue",
+    "./pages/**/*.vue",
+    "./plugins/**/*.{js,ts}",
+    "./presets/**/*.{js,ts}",
   ],
 };

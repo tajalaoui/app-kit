@@ -1,65 +1,97 @@
+/* Base theme variables - Single source of truth */
 :root {
-  /* SURFACE COLORS - Critical for components like Card, DataTable, etc. */
-  --surface-a: var(--surface-bg); /* Main surface color */
-  --surface-b: var(
-    --base-bg
-  ); /* Secondary surface - important for striped tables */
-  --surface-c: var(--border); /* Borders and dividers */
-  --surface-d: var(--border); /* Stronger borders */
-  --surface-e: var(--surface-bg); /* Overlay surfaces (dialogs, etc) */
-  --surface-f: var(--surface-bg); /* Cards, panels foreground */
+  /* Base Colors - Light Theme */
+  --base-bg: #f5f5f5;
+  --surface-bg: #ffffff;
+  --surface-bg-50: #fafafa;
 
-  /* NUMBERED SYSTEM - Optimized with fewer redundant mappings */
-  --surface-0: var(--surface-bg); /* Base surface */
-  --surface-50: var(
-    --surface-bg-50,
-    #fafafa
-  ); /* Very light variant (custom fallback) */
-  --surface-100: var(--surface-bg); /* Light background */
-  --surface-200: var(--surface-bg); /* Light background active */
-  --surface-300: var(--border); /* Border color */
-  --surface-400: var(--border); /* Border color (emphasized) */
-  --surface-500: var(--secondary-text); /* Secondary text */
-  --surface-600: var(--secondary-text); /* Secondary text (emphasized) */
-  --surface-700: var(--primary-text); /* Primary text */
-  --surface-800: var(--primary-text); /* Primary text (emphasized) */
-  --surface-900: var(--primary-text); /* Strong text */
+  /* Text Colors */
+  --primary-text: #1c1c1c;
+  --secondary-text: #5c5c5c;
+
+  /* Action Colors */
+  --action: #34c759;
+  --action-50: #f2f9f2;
+  --action-100: #e2f5e5;
+  --action-200: #ccedcf;
+  --action-300: #9ddea2;
+  --action-400: #66d97c;
+  --action-600: #28b14a;
+  --action-hover: #009900;
+  --action-800: #16802f;
+  --action-900: #0f6223;
+  --action-950: #084d18;
+
+  /* UI Element Colors */
+  --disabled: #b3b3b3;
+  --info: #cddc39;
+  --info-light: rgba(205, 220, 57, 0.2);
+  --link: #007a00;
+  --border: #dddddd;
+  --shadow: rgba(0, 0, 0, 0.1);
+
+  /* Status Colors */
+  --success: #3a9d3a;
+  --success-light: rgba(58, 157, 58, 0.2);
+  --warning: #e68a00;
+  --warning-light: rgba(230, 138, 0, 0.2);
+  --error: #f44336;
+  --error-light: rgba(244, 67, 54, 0.2);
+
+  /* SURFACE COLORS - Critical for PrimeVue components */
+  --surface-a: #ffffff; /* Main surface color */
+  --surface-b: #f5f5f5; /* Secondary surface */
+  --surface-c: #dddddd; /* Borders and dividers */
+  --surface-d: #dddddd; /* Stronger borders */
+  --surface-e: #ffffff; /* Overlay surfaces (dialogs, etc) */
+  --surface-f: #ffffff; /* Cards, panels foreground */
+
+  /* NUMBERED SYSTEM - Used by PrimeVue */
+  --surface-0: #ffffff; /* Base surface */
+  --surface-50: #fafafa; /* Very light variant */
+  --surface-100: #ffffff; /* Light background */
+  --surface-200: #ffffff; /* Light background active */
+  --surface-300: #dddddd; /* Border color */
+  --surface-400: #dddddd; /* Border color (emphasized) */
+  --surface-500: #5c5c5c; /* Secondary text */
+  --surface-600: #5c5c5c; /* Secondary text (emphasized) */
+  --surface-700: #1c1c1c; /* Primary text */
+  --surface-800: #1c1c1c; /* Primary text (emphasized) */
+  --surface-900: #1c1c1c; /* Strong text */
 
   /* SEMANTIC SURFACES - For direct component usage */
-  --surface-ground: var(--base-bg); /* Page background */
-  --surface-section: var(--surface-bg); /* Section backgrounds */
-  --surface-card: var(--surface-bg); /* Card backgrounds */
-  --surface-overlay: var(
-    --surface-bg
-  ); /* Overlay backgrounds (modals, dropdowns) */
-  --surface-border: var(--border); /* All component borders */
+  --surface-ground: #f5f5f5; /* Page background */
+  --surface-section: #ffffff; /* Section backgrounds */
+  --surface-card: #ffffff; /* Card backgrounds */
+  --surface-overlay: #ffffff; /* Overlay backgrounds (modals, dropdowns) */
+  --surface-border: #dddddd; /* All component borders */
   --surface-hover: rgba(0, 0, 0, 0.04); /* Hover states - light */
 
   /* TEXT COLORS */
-  --text-color: var(--primary-text); /* Primary text */
-  --text-color-secondary: var(--secondary-text); /* Secondary text */
+  --text-color: #1c1c1c; /* Primary text */
+  --text-color-secondary: #5c5c5c; /* Secondary text */
 
   /* PRIMARY COLORS - For buttons and interactive elements */
-  --primary-50: var(--action-50, #f2f9f2); /* Very light primary */
-  --primary-100: var(--action-100, #e2f5e5); /* Light primary background */
-  --primary-200: var(--action-200, #ccedcf); /* Light primary active */
-  --primary-300: var(--action-300, #9ddea2); /* Mid-light primary */
-  --primary-400: var(--action-400, #66d97c); /* Medium primary */
-  --primary-500: var(--action); /* Base primary color */
-  --primary-600: var(--action-hover); /* Hover state */
-  --primary-700: var(--action-hover); /* Active state */
-  --primary-800: var(--action-800, #16802f); /* Dark primary */
-  --primary-900: var(--action-900, #0f6223); /* Very dark primary */
-  --primary-950: var(--action-950, #084d18); /* Deepest primary */
+  --primary-50: #f2f9f2; /* Very light primary */
+  --primary-100: #e2f5e5; /* Light primary background */
+  --primary-200: #ccedcf; /* Light primary active */
+  --primary-300: #9ddea2; /* Mid-light primary */
+  --primary-400: #66d97c; /* Medium primary */
+  --primary-500: #34c759; /* Base primary color */
+  --primary-600: #28b14a; /* Hover state */
+  --primary-700: #009900; /* Active state */
+  --primary-800: #16802f; /* Dark primary */
+  --primary-900: #0f6223; /* Very dark primary */
+  --primary-950: #084d18; /* Deepest primary */
 
   /* FOCUS STATES */
   --focus-ring: 0 0 0 2px var(--action-hover);
 
   /* STATE COLORS - For alerts, validation, etc. */
-  --green-500: var(--success);
-  --yellow-500: var(--warning);
-  --red-500: var(--error);
-  --blue-500: var(--info);
+  --green-500: #3a9d3a;
+  --yellow-500: #e68a00;
+  --red-500: #f44336;
+  --blue-500: #cddc39;
 
   /* COMPONENT SPACING */
   --content-padding: 1rem; /* Standard padding */
@@ -67,77 +99,116 @@
   --border-radius: 4px; /* Standard border radius */
 
   /* INPUT STYLING - For forms */
-  --input-bg: var(--surface-bg);
-  --input-text-color: var(--primary-text);
-  --input-border-color: var(--border);
-  --input-hover-border-color: var(--action);
-  --input-focus-border-color: var(--action);
-  --input-error-border-color: var(--error);
+  --input-bg: #ffffff;
+  --input-text-color: #1c1c1c;
+  --input-border-color: #dddddd;
+  --input-hover-border-color: #34c759;
+  --input-focus-border-color: #34c759;
+  --input-error-border-color: #f44336;
 
   /* TABLE SPECIFIC VARIABLES - For DataTable component */
-  --data-table-header-bg: var(--surface-bg);
-  --data-table-header-text-color: var(--primary-text);
-  --data-table-body-row-bg: var(--surface-bg);
-  --data-table-body-row-text-color: var(--primary-text);
-  --data-table-body-row-even-bg: var(
-    --surface-50,
-    #fafafa
-  ); /* Fixed for light theme */
-  --data-table-border-color: var(--border);
+  --data-table-header-bg: #ffffff;
+  --data-table-header-text-color: #1c1c1c;
+  --data-table-body-row-bg: #ffffff;
+  --data-table-body-row-text-color: #1c1c1c;
+  --data-table-body-row-even-bg: #fafafa;
+  --data-table-border-color: #dddddd;
 
-  /* ANIMATION VARIABLES - New section */
-  --transition-duration: 0.3s;
+  /* ANIMATION VARIABLES */
+  --transition-duration: 0.2s;
   --transition-timing: ease;
 }
 
 /* DARK THEME OVERRIDES */
 .dark-theme:root,
 .dark:root {
+  /* Base Colors */
+  --base-bg: #121212;
+  --surface-bg: #1c1c1c;
+  --surface-bg-50: #252525;
+
+  /* Text Colors */
+  --primary-text: #f5f5f5;
+  --secondary-text: #cccccc;
+
+  /* Action Colors */
+  --action: #30d158;
+  --action-50: #0f261a;
+  --action-100: #152f1e;
+  --action-200: #1b3d25;
+  --action-300: #245332;
+  --action-400: #2c6a40;
+  --action-600: #28aa50;
+  --action-hover: #28c25d;
+  --action-800: #36d466;
+  --action-900: #4edb7a;
+  --action-950: #67e08d;
+
+  /* UI Element Colors */
+  --disabled: #5a5a5a;
+  --link: #36d466;
+  --border: #2e2e2e;
+  --shadow: rgba(255, 255, 255, 0.1);
+
+  /* Status Colors */
+  --success: #43b543;
+  --warning: #ffb74d;
+  --error: #f44336;
+
   /* SURFACE COLORS */
-  --surface-a: var(--surface-bg);
-  --surface-b: var(--base-bg);
-  --surface-c: var(--border);
-  --surface-d: var(--border);
-  --surface-e: var(--surface-bg);
-  --surface-f: var(--surface-bg);
+  --surface-a: #1c1c1c; /* Main surface color */
+  --surface-b: #121212; /* Secondary surface */
+  --surface-c: #2e2e2e; /* Borders and dividers */
+  --surface-d: #2e2e2e; /* Stronger borders */
+  --surface-e: #1c1c1c; /* Overlay surfaces (dialogs, etc) */
+  --surface-f: #1c1c1c; /* Cards, panels foreground */
 
   /* NUMBERED SYSTEM */
-  --surface-0: var(--surface-bg);
-  --surface-50: var(
-    --surface-bg-50,
-    #252525
-  ); /* Dark variant for stripes (custom fallback) */
-  --surface-100: var(--surface-bg);
-  --surface-200: var(--surface-bg);
-  --surface-300: var(--border);
-  --surface-400: var(--border);
-  --surface-500: var(--secondary-text);
-  --surface-600: var(--secondary-text);
-  --surface-700: var(--primary-text);
-  --surface-800: var(--primary-text);
-  --surface-900: var(--primary-text);
+  --surface-0: #1c1c1c; /* Base surface */
+  --surface-50: #252525; /* Very light variant for stripes */
+  --surface-100: #1c1c1c; /* Light background */
+  --surface-200: #1c1c1c; /* Light background active */
+  --surface-300: #2e2e2e; /* Border color */
+  --surface-400: #2e2e2e; /* Border color (emphasized) */
+  --surface-500: #cccccc; /* Secondary text */
+  --surface-600: #cccccc; /* Secondary text (emphasized) */
+  --surface-700: #f5f5f5; /* Primary text */
+  --surface-800: #f5f5f5; /* Primary text (emphasized) */
+  --surface-900: #f5f5f5; /* Strong text */
 
   /* SEMANTIC SURFACES */
-  --surface-ground: var(--base-bg);
-  --surface-section: var(--surface-bg);
-  --surface-card: var(--surface-bg);
-  --surface-overlay: var(--surface-bg);
-  --surface-border: var(--border);
+  --surface-ground: #121212; /* Page background */
+  --surface-section: #1c1c1c; /* Section backgrounds */
+  --surface-card: #1c1c1c; /* Card backgrounds */
+  --surface-overlay: #1c1c1c; /* Overlay backgrounds (modals, dropdowns) */
+  --surface-border: #2e2e2e; /* All component borders */
   --surface-hover: rgba(255, 255, 255, 0.1); /* Hover states - dark */
 
+  /* TEXT COLORS */
+  --text-color: #f5f5f5; /* Primary text */
+  --text-color-secondary: #cccccc; /* Secondary text */
+
+  /* Input styling */
+  --input-bg: #1c1c1c;
+  --input-text-color: #f5f5f5;
+  --input-border-color: #2e2e2e;
+
   /* TABLE SPECIFIC VARIABLES - Updated for dark theme */
-  --data-table-header-bg: var(--surface-bg);
-  --data-table-header-text-color: var(--primary-text);
-  --data-table-body-row-bg: var(--surface-bg);
-  --data-table-body-row-text-color: var(--primary-text);
-  --data-table-body-row-even-bg: var(
-    --surface-50,
-    #252525
-  ); /* Fixed for dark theme */
-  --data-table-border-color: var(--border);
+  --data-table-header-bg: #1c1c1c;
+  --data-table-header-text-color: #f5f5f5;
+  --data-table-body-row-bg: #1c1c1c;
+  --data-table-body-row-text-color: #f5f5f5;
+  --data-table-body-row-even-bg: #252525;
+  --data-table-border-color: #2e2e2e;
 }
 
-/* COMPONENT-SPECIFIC OVERRIDES - Only essential ones */
+/* Basic element styling */
+body {
+  background-color: var(--base-bg);
+  color: var(--primary-text);
+}
+
+/* COMPONENT-SPECIFIC OVERRIDES */
 
 /* DataTable styling */
 .p-datatable .p-datatable-thead > tr > th {
@@ -151,7 +222,7 @@
 .p-datatable .p-datatable-tbody > tr {
   background-color: var(--data-table-body-row-bg);
   color: var(--data-table-body-row-text-color);
-  transition: background-color 0.2s;
+  transition: background-color var(--transition-duration);
 }
 
 .p-datatable .p-datatable-tbody > tr:nth-child(even) {
@@ -184,7 +255,8 @@
   background-color: var(--input-bg);
   color: var(--input-text-color);
   border-color: var(--input-border-color);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color var(--transition-duration),
+    box-shadow var(--transition-duration);
 }
 
 .p-inputtext:hover {
@@ -195,4 +267,12 @@
   outline: 0 none;
   border-color: var(--input-focus-border-color);
   box-shadow: var(--focus-ring);
+}
+
+/* Theme transition for smooth mode switching */
+.theme-transition {
+  transition: background-color var(--transition-duration)
+      var(--transition-timing),
+    color var(--transition-duration) var(--transition-timing),
+    border-color var(--transition-duration) var(--transition-timing);
 }

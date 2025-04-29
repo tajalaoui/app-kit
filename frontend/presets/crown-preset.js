@@ -1,8 +1,7 @@
 // presets/crown-preset.js
 import { definePreset } from "@primevue/themes";
-import Aura from "@primevue/themes/aura";
 
-export default definePreset(Aura, {
+export default definePreset({
   name: "crown",
 
   // Color palette definition using CSS variables
@@ -46,14 +45,5 @@ export default definePreset(Aura, {
       overlay: "var(--surface-bg)",
       border: "var(--border)",
     },
-  },
-
-  // Theme transitions
-  global: {
-    css: `
-      * {
-        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-      }
-    `,
   },
 });

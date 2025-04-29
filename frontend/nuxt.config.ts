@@ -1,3 +1,4 @@
+// nuxt.config.ts
 import path from "path";
 import CrownPreset from "./presets/crown-preset";
 
@@ -26,13 +27,6 @@ export default defineNuxtConfig({
       theme: {
         preset: CrownPreset,
       },
-      pt: {
-        global: {
-          root: () => ({
-            class: "theme-transition",
-          }),
-        },
-      },
     },
     importPT: { as: "Crown", from: "~/presets/crown" },
   },
@@ -40,7 +34,6 @@ export default defineNuxtConfig({
   css: [
     "primeicons/primeicons.css",
     "./assets/css/base.css",
-    "./assets/css/variables.css",
     "./assets/css/theme.css",
     "./assets/css/tailwind.css",
   ],

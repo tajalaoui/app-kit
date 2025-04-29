@@ -1,50 +1,23 @@
+// presets/crown/index.js
 export default {
-  // Global theme styles - will apply to all components
-  global: {
-    css: `
-      .theme-transition {
-        transition: background-color 0.3s ease, color 0.3s ease, 
-          border-color 0.3s ease, box-shadow 0.3s ease;
-      }
-    `,
-  },
-
   // Button styling
   button: {
     root: ({ props }) => ({
       class: [
-        // Base styles that apply to all buttons
         "theme-transition rounded-md focus:outline-none focus:ring-2",
-
-        // Button types based on severity
         {
-          // Primary style (default)
           "bg-action hover:bg-action-hover text-white":
             props.severity === "primary" || !props.severity,
-
-          // Success style
           "bg-success hover:bg-success/80 text-white":
             props.severity === "success",
-
-          // Warning style
           "bg-warning hover:bg-warning/80 text-white":
             props.severity === "warning",
-
-          // Danger/Error style
           "bg-error hover:bg-error/80 text-white": props.severity === "danger",
-
-          // Info style
           "bg-info hover:bg-info/80 text-black": props.severity === "info",
-
-          // Text button style
           "bg-transparent hover:bg-black/5 dark:hover:bg-white/10 text-primary-text":
             props.text === true,
-
-          // Outlined button style
           "bg-transparent border border-action text-action hover:bg-action/10":
             props.outlined === true,
-
-          // Disabled state
           "bg-disabled text-white/70 cursor-not-allowed pointer-events-none":
             props.disabled === true,
         },
@@ -83,33 +56,19 @@ export default {
     table: {
       class: "w-full",
     },
-    thead: {
-      class: "",
-    },
-    tbody: {
-      class: "",
-    },
-    tfoot: {
-      class: "",
-    },
-    // Individual row styling can be handled here
     bodyRow: ({ context }) => ({
       class: [
         "transition-colors duration-200",
-        // Hover state
         "hover:bg-black/5 dark:hover:bg-white/5",
-        // Striped rows
         {
           "bg-surface-bg": context.index % 2 === 0,
           "bg-surface-bg-50": context.index % 2 === 1,
         },
       ],
     }),
-    // Header cell styling
     headerCell: {
       class: "text-primary-text font-semibold p-3 border-b border-border",
     },
-    // Body cell styling
     bodyCell: {
       class: "p-3 border-b border-border/50",
     },
@@ -170,9 +129,6 @@ export default {
     menu: {
       class: "p-1",
     },
-    menuitem: {
-      class: "",
-    },
     content: ({ context }) => ({
       class: [
         "cursor-pointer rounded-sm p-2 transition-colors flex items-center",
@@ -192,6 +148,4 @@ export default {
       class: "border-t border-border my-1",
     },
   },
-
-  // Add more component customizations as needed
 };

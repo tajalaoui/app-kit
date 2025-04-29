@@ -3,7 +3,7 @@
     class="h-16 flex items-center transition-colors duration-200 border-b shadow-sm"
     style="border-color: var(--border)"
   >
-    <!-- Sidebar toggle button - behavior differs on mobile vs desktop -->
+    <!-- Sidebar toggle button -->
     <Button
       @click="isMobile ? $emit('open-mobile-menu') : $emit('toggle-sidebar')"
       icon="pi pi-bars"
@@ -14,14 +14,14 @@
       aria-label="Toggle sidebar"
     />
 
-    <!-- App logo/title -->
+    <!-- App logo/title (mobile only) -->
     <div class="sm:hidden flex items-center px-2 md:px-4">
       <span class="text-lg md:text-xl font-semibold text-primary ml-2"
         >App Kit</span
       >
     </div>
 
-    <!-- Search box (hidden on small mobile, centered on larger screens) -->
+    <!-- Search box -->
     <div class="hidden sm:flex flex-grow mx-4 justify-center">
       <span class="p-input-icon-left w-full max-w-md">
         <InputText placeholder="Search..." class="w-full" />
@@ -30,7 +30,7 @@
 
     <!-- Right side controls -->
     <div class="flex items-center space-x-1 md:space-x-3 ml-auto mr-2 md:mr-4">
-      <!-- Theme toggle - icon only -->
+      <!-- Theme toggle -->
       <Button
         @click="toggleTheme"
         :icon="isDark ? 'pi pi-sun' : 'pi pi-moon'"

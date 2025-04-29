@@ -28,7 +28,6 @@
           App Kit
         </span>
       </div>
-      <!-- Close button for mobile -->
       <Button
         v-if="!collapsed && isMobile"
         @click="closeMobileMenu"
@@ -64,9 +63,8 @@
               >{{ item.label }}</span
             >
 
-            <!-- Dropdown indicator for items with children -->
             <i
-              v-if="(!collapsed || isMobile) && item.items && item.items.length"
+              v-if="(!collapsed || isMobile) && item.items?.length"
               :class="[
                 expanded[item.label]
                   ? 'pi pi-chevron-down'
@@ -77,7 +75,7 @@
             ></i>
           </div>
 
-          <!-- Submenu items (only show when parent is expanded and sidebar is not collapsed or on mobile) -->
+          <!-- Submenu items -->
           <div
             v-if="
               (!collapsed || isMobile) && item.items && expanded[item.label]
@@ -127,12 +125,10 @@ const props = defineProps({
 
 const emit = defineEmits(["toggle-sidebar", "close-mobile-menu"]);
 
-// Keep track of which menu items are expanded
 const expanded = ref({});
 const { width } = useWindowSize();
 const isMobile = computed(() => width.value < 768);
 
-// Menu items configuration
 const menuItems = [
   {
     label: "Dashboard",
@@ -173,31 +169,24 @@ const menuItems = [
   },
 ];
 
-// Close mobile menu helper
 const closeMobileMenu = () => {
   emit("close-mobile-menu");
 };
 
-// Handle navigation and submenu toggling
 const navigateTo = (item) => {
-  if (item.items && item.items.length) {
-    // Toggle submenu if item has children
+  if (item.items?.length) {
     expanded.value[item.label] = !expanded.value[item.label];
   } else {
-    // For non-parent items, navigate directly
     useRouter().push(item.to);
-
-    // Close menu if on mobile
     if (isMobile.value) {
       closeMobileMenu();
     }
   }
 };
 
-// Initialize expanded state
 onMounted(() => {
   menuItems.forEach((item) => {
-    if (item.items && item.items.length) {
+    if (item.items?.length) {
       expanded.value[item.label] = false;
     }
   });

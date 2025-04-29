@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen">
     <div class="flex flex-grow">
-      <!-- Mobile overlay when sidebar is open -->
+      <!-- Mobile overlay -->
       <div
         v-if="isMobile && mobileMenuOpen"
         class="fixed inset-0 bg-black bg-opacity-70 z-10 overflow-hidden"
@@ -35,7 +35,6 @@
 
         <!-- Main content -->
         <main class="flex-grow p-2 md:p-4 transition-colors duration-200">
-          <!-- Page content -->
           <slot />
         </main>
 
@@ -47,18 +46,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
 import { useWindowSize } from "@vueuse/core";
 
-// Mobile detection
 const { width } = useWindowSize();
 const isMobile = computed(() => width.value < 768);
 const mobileMenuOpen = ref(false);
-
-// Initialize sidebar state from localStorage or default to false (expanded)
 const sidebarCollapsed = ref(false);
 
-// Toggle sidebar and save state to localStorage
 const toggleSidebar = () => {
   if (isMobile.value) {
     mobileMenuOpen.value = !mobileMenuOpen.value;
@@ -71,7 +65,6 @@ const toggleSidebar = () => {
   }
 };
 
-// Mobile-specific handlers
 const openMobileMenu = () => {
   mobileMenuOpen.value = true;
 };
@@ -80,31 +73,23 @@ const closeMobileMenu = () => {
   mobileMenuOpen.value = false;
 };
 
-// Load sidebar state from localStorage on component mount
 onMounted(() => {
+  // Load sidebar state from localStorage
   const savedState = localStorage.getItem("sidebarCollapsed");
-  if (savedState !== null) {
-    // Only apply saved state on desktop
-    if (!isMobile.value) {
-      sidebarCollapsed.value = JSON.parse(savedState);
-    }
+
+  if (savedState !== null && !isMobile.value) {
+    sidebarCollapsed.value = JSON.parse(savedState);
   }
 
-  // On mobile, always start with closed sidebar
+  // Always start with closed sidebar on mobile
   if (isMobile.value) {
     mobileMenuOpen.value = false;
   }
 });
 
-// Watch for changes to save to localStorage
-watch(sidebarCollapsed, (newValue) => {
-  localStorage.setItem("sidebarCollapsed", JSON.stringify(newValue));
-});
-
-// Watch for window size changes to adjust UI
+// Watch for changes to window size
 watch(isMobile, (newValue) => {
   if (newValue) {
-    // When switching to mobile
     mobileMenuOpen.value = false;
   }
 });
