@@ -40,9 +40,10 @@ export default defineNuxtConfig({
     importPT: { as: "Crown", from: "~/presets/crown" },
   },
   css: [
+    "primeicons/primeicons.css",
     "./assets/css/base.css",
     "./assets/css/variables.css", // Single source of CSS variables
-    "primeicons/primeicons.css",
+    "./assets/css/theme.css",
     "./assets/css/tailwind.css",
   ],
   image: {

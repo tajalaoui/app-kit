@@ -1,0 +1,68 @@
+/* PrimeVue simplified theme variables override */
+
+:root {
+  /* Surface colors (controls backgrounds of components) */
+  --surface-0: var(--surface-bg);
+  --surface-50: var(--surface-bg);
+  --surface-100: var(--surface-bg);
+  --surface-200: var(--surface-bg);
+  --surface-300: var(--border);
+  --surface-400: var(--border);
+  --surface-500: var(--secondary-text);
+  --surface-600: var(--secondary-text);
+  --surface-700: var(--primary-text);
+  --surface-800: var(--primary-text);
+  --surface-900: var(--primary-text);
+
+  /* Primary color (controls many interactive elements) */
+  --primary-50: var(--action);
+  --primary-100: var(--action);
+  --primary-200: var(--action);
+  --primary-300: var(--action);
+  --primary-400: var(--action);
+  --primary-500: var(--action);
+  --primary-600: var(--action-hover);
+  --primary-700: var(--action-hover);
+  --primary-800: var(--action-hover);
+  --primary-900: var(--action-hover);
+
+  /* Text colors */
+  --text-color: var(--primary-text);
+  --text-color-secondary: var(--secondary-text);
+
+  /* Other key variables */
+  --surface-ground: var(--base-bg);
+  --surface-section: var(--surface-bg);
+  --surface-card: var(--surface-bg);
+  --surface-overlay: var(--surface-bg);
+  --surface-border: var(--border);
+  --surface-hover: rgba(0, 0, 0, 0.04);
+
+  /* Focus ring (accessibility) */
+  --focus-ring: 0 0 0 2px var(--action-hover);
+}
+
+/* Dark theme variables - automatically applied when dark theme is active */
+.dark-theme:root,
+.dark:root {
+  --surface-0: var(--surface-bg);
+  --surface-50: var(--surface-bg);
+  --surface-100: var(--surface-bg);
+  --surface-200: var(--surface-bg);
+  --surface-300: var(--border);
+  --surface-400: var(--border);
+  --surface-500: var(--secondary-text);
+  --surface-600: var(--secondary-text);
+  --surface-700: var(--primary-text);
+  --surface-800: var(--primary-text);
+  --surface-900: var(--primary-text);
+
+  --surface-ground: var(--base-bg);
+  --surface-section: var(--surface-bg);
+  --surface-card: var(--surface-bg);
+  --surface-overlay: var(--surface-bg);
+  --surface-border: var(--border);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+
+  /* Text color remains the same because it's already handled by CSS variables */
+}
