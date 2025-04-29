@@ -39,12 +39,6 @@
   --text-color: var(--primary-text); /* Primary text */
   --text-color-secondary: var(--secondary-text); /* Secondary text */
 
-  /* TYPOGRAPHY VARIABLES - New section */
-  --font-family: "Inter", sans-serif;
-  --font-family-heading: "Satoshi", sans-serif;
-  --font-size-base: 1rem;
-  --line-height-base: 1.5;
-
   /* PRIMARY COLORS - For buttons and interactive elements */
   --primary-50: var(--action-50, #f2f9f2); /* Very light primary */
   --primary-100: var(--action-100, #e2f5e5); /* Light primary background */
